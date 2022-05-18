@@ -18,7 +18,7 @@
   The set of words is stored in .csv file extension. User can load his own set of words.
 ## Development stages
 ### Used technologies
-  Qt (open-source library based on C++ programming language) was used to develop this program.
+  SFML (open-source library based on C++ programming language) was used to develop this program.
 ### Main tasks
   1. Graphic window
   2. Textbox
