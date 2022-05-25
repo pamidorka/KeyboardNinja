@@ -50,10 +50,6 @@ public:
 		this->character_color_ = _color;
 	}
 
-	void SetFont(Font _font) {
-		this->charaster_font_ = _font;
-	}
-
 	int GetKeyCode() {
 		return this->keycode_;
 	}
