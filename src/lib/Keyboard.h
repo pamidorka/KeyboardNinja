@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Button.h"
 
 class VirtualKeyboard {
 private:
@@ -10,7 +11,7 @@ private:
 	};
 
 	Button* buttons_;
-	Font keyboard_font_;
+	Font* keyboard_font_;
 	Position position_;
 
 public:
@@ -67,7 +68,7 @@ public:
 		this->position_.y = _y;
 	}
 
-	void SetFont(Font _font) {
+	void SetFont(Font* _font) {
 		this->keyboard_font_ = _font;
 	}
 
@@ -107,8 +108,28 @@ public:
 		return this->position_;
 	}
 
-	Font GetFont() {
+	Font* GetFont() {
 		return this->keyboard_font_;
+	}
+
+	void Draw(RenderWindow* _window) {
+		for (int i = 0; i < 27; i++) {
+			RectangleShape butt;
+			butt.setSize(Vector2f(buttons_[i].GetSize().x, buttons_[i].GetSize().y));
+			butt.setPosition(Vector2f(GetPosition().x + buttons_[i].GetPosition().x, GetPosition().y + buttons_[i].GetPosition().y));
+			butt.setFillColor(buttons_[i].GetColor());
+			butt.setOutlineThickness(1);
+			butt.setOutlineColor(Color::Black);
+
+			Text text;
+			text.setFont(keyboard_font_);
+			text.setString((char)toupper(buttons_[i].GetCharacter()));
+			text.setPosition(Vector2f(GetPosition().x + buttons_[i].GetPosition().x + 5, GetPosition().y + buttons_[i].GetPosition().y + 3));
+			text.setFillColor(buttons_[i].GetCharacterColor());
+
+			_window->draw(butt);
+			_window->draw(text);
+		}
 	}
 
 };
