@@ -122,7 +122,7 @@ public:
 			butt.setOutlineColor(Color::Black);
 
 			Text text;
-			text.setFont(keyboard_font_);
+			text.setFont(*keyboard_font_);
 			text.setString((char)toupper(buttons_[i].GetCharacter()));
 			text.setPosition(Vector2f(GetPosition().x + buttons_[i].GetPosition().x + 5, GetPosition().y + buttons_[i].GetPosition().y + 3));
 			text.setFillColor(buttons_[i].GetCharacterColor());
