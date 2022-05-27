@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-VirtualKeyboard::VirtualKeyboard(Settings* settings, std::string _font_name) {
+VirtualKeyboard::VirtualKeyboard(std::string _font_name) {
 	buttons_ = new Button[27];
 
 	for (int i = 0, j = 'a'; i <= 25; j++, i++) {
@@ -8,8 +8,6 @@ VirtualKeyboard::VirtualKeyboard(Settings* settings, std::string _font_name) {
 		buttons_[i].SetCharacter(j);
 		buttons_[i].SetColor(Color::White);
 	}
-
-	this->settings = settings;
 
 	{
 		buttons_[0].SetPosistion(0, 60 + kSizeOfOutline_);
@@ -48,7 +46,7 @@ VirtualKeyboard::VirtualKeyboard(Settings* settings, std::string _font_name) {
 
 	if (!keyboard_font_.loadFromFile("src/fonts/" + _font_name)) {
 		cout << "font not loaded" << endl;
-		throw std::exception("font not loaded");
+		throw std::runtime_error("font not loaded");
 	}
 
 	SetPosition(0, 0);

@@ -13,7 +13,6 @@ private:
 		double y;
 	};
 
-	Settings* settings;
 	Button* buttons_;
 	sf::Font keyboard_font_;
 	Position position_;
