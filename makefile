@@ -8,18 +8,19 @@ BUTTON = src/lib/Button.cpp
 KEYBOARD = src/lib/Keyboard.cpp
 SETTINGS = src/lib/Settings.cpp
 MAIN = src/main/main.cpp
+SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
 COMPILE = obj/lib/main.o obj/lib/Button.o obj/lib/Keyboard.o obj/lib/Settings.o
 
-bin/master: $(COMPILE)
+bin/master: $(COMPILE) $(SFML)
 	$(CPP) $(COMPILE) $(SFML) -o $@
-obj/lib/main.o: $(MAIN)
+obj/lib/main.o: $(MAIN) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(MAIN)
-obj/lib/Button.o: $(BUTTON)
+obj/lib/Button.o: $(BUTTON) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(BUTTON)
-obj/lib/Keyboard.o: $(KEYBOARD) 
+obj/lib/Keyboard.o: $(KEYBOARD) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(KEYBOARD)
-obj/lib/Settings.o: $(SETTINGS)
+obj/lib/Settings.o: $(SETTINGS) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(SETTINGS)
 
 -include Keyboard.d Button.d Settings.d main.d
