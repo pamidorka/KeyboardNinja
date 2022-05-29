@@ -3,3 +3,17 @@
 
 .vs/
 SFML-2.5.1
+
+# objects files
+
+Button.d
+Button.o
+Keyboard.d
+Keyboard.o
+main.d
+main.o
+Settings.d
+Settings.o
+Textbox.d
+Textbox.o
+master
