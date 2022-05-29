@@ -22,7 +22,7 @@ private:
 
 public:
 
-	VirtualKeyboard(Settings* settings, std::string _font_name);
+	VirtualKeyboard(std::string _font_name);
 	void SetPosition(const double _x, const double _y);
 	void ChangePressedKey(const int _key);
 	void ChangeReleasedKey(const int _key);

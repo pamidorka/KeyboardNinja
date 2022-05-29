@@ -6,7 +6,7 @@ VirtualKeyboard::VirtualKeyboard(std::string _font_name) {
 	for (int i = 0, j = 'a'; i <= 25; j++, i++) {
 		buttons_[i].SetKeyCode(i);
 		buttons_[i].SetCharacter(j);
-		buttons_[i].SetColor(Color::White);
+		buttons_[i].SetColor(sf::Color::White);
 	}
 
 	{
@@ -39,17 +39,17 @@ VirtualKeyboard::VirtualKeyboard(std::string _font_name) {
 		buttons_[26].SetPosistion(60 + kSizeOfOutline_, 3 * (60 + kSizeOfOutline_));
 
 		buttons_[26].SetKeyCode(57);
-		buttons_[26].SetColor(Color::White);
+		buttons_[26].SetColor(sf::Color::White);
 		buttons_[26].SetCharacter(' ');
-		buttons_[26].SetSize(3 * (60 + kSizeOfOutline_), 60);
+		buttons_[26].SetSize(4 * (60 + kSizeOfOutline_) - 1, 60);
 	}
 
 	if (!keyboard_font_.loadFromFile("src/fonts/" + _font_name)) {
-		cout << "font not loaded" << endl;
+		std::cout << "font not loaded" << std::endl;
 		throw std::runtime_error("font not loaded");
 	}
 
-	SetPosition(0, 0);
+	SetPosition(300, 300);
 }
 
 void VirtualKeyboard::SetPosition(const double _x, const double _y) {
@@ -62,13 +62,13 @@ void VirtualKeyboard::ChangePressedKey(const int _key) {
 		return;
 	}
 	if (_key == 57) {
-		buttons_[26].SetColor(Color::Black);
-		buttons_[26].SetCharacterColor(Color::White);
+		buttons_[26].SetColor(sf::Color::Black);
+		buttons_[26].SetCharacterColor(sf::Color::White);
 		return;
 	}
 
-	buttons_[_key].SetColor(Color::Black);
-	buttons_[_key].SetCharacterColor(Color::White);
+	buttons_[_key].SetColor(sf::Color::Black);
+	buttons_[_key].SetCharacterColor(sf::Color::White);
 }
 
 void VirtualKeyboard::ChangeReleasedKey(const int _key) {
@@ -76,13 +76,13 @@ void VirtualKeyboard::ChangeReleasedKey(const int _key) {
 		return;
 	}
 	if (_key == 57) {
-		buttons_[26].SetColor(Color::White);
-		buttons_[26].SetCharacterColor(Color::Black);
+		buttons_[26].SetColor(sf::Color::White);
+		buttons_[26].SetCharacterColor(sf::Color::Black);
 		return;
 	}
 
-	buttons_[_key].SetColor(Color::White);
-	buttons_[_key].SetCharacterColor(Color::Black);
+	buttons_[_key].SetColor(sf::Color::White);
+	buttons_[_key].SetCharacterColor(sf::Color::Black);
 }
 
 VirtualKeyboard::Position VirtualKeyboard::GetPosition() {
@@ -92,17 +92,17 @@ VirtualKeyboard::Position VirtualKeyboard::GetPosition() {
 void VirtualKeyboard::Draw(sf::RenderWindow* _window) {
 	for (int i = 0; i < 27; i++) {
 		sf::RectangleShape butt;
-		butt.setSize(Vector2f(buttons_[i].GetSize().x, buttons_[i].GetSize().y));
-		butt.setPosition(Vector2f(position_.x + buttons_[i].GetPosition().x, position_.y + buttons_[i].GetPosition().y));
+		butt.setSize(sf::Vector2f(buttons_[i].GetSize().x, buttons_[i].GetSize().y));
+		butt.setPosition(sf::Vector2f(position_.x + buttons_[i].GetPosition().x, position_.y + buttons_[i].GetPosition().y));
 		butt.setFillColor(buttons_[i].GetColor());
 		butt.setOutlineThickness(kSizeOfOutline_);
-		butt.setOutlineColor(Color::Black);
+		butt.setOutlineColor(sf::Color::Black);
 
 		sf::Text text;
 		text.setFont(keyboard_font_);
 		text.setCharacterSize(kSizeOfCharacter_);
 		text.setString((char)toupper(buttons_[i].GetCharacter()));
-		text.setPosition(Vector2f(position_.x + buttons_[i].GetPosition().x + 5, position_.y + buttons_[i].GetPosition().y + 3));
+		text.setPosition(sf::Vector2f(position_.x + buttons_[i].GetPosition().x + 5, position_.y + buttons_[i].GetPosition().y + 3));
 		text.setFillColor(buttons_[i].GetCharacterColor());
 
 		_window->draw(butt);
