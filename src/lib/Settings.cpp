@@ -2,14 +2,14 @@
 
 const string Settings::kDefaultVocabularyFileName = "vocab.txt";
 const string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
-const unsigned int Settings::kDefaultTextSize = 16;
+const unsigned int Settings::kDefaultTextSize = 24;
 
 Settings::Settings() {
-	if (!LoadVocabularyFromCSV(kDefaultVocabularyFileName)) {
-		throw exception("Failed to open the default vocabulary file.");
+	if (!LoadVocabularyFromCSV("src/wordbase/" + kDefaultVocabularyFileName)) {
+		throw runtime_error("Failed to open the default vocabulary file.");
 	}
-	if (!LoadFont(kDefaultFontFileName)) {
-		throw exception("Failed to open the default font file.");
+	if (!LoadFont("src/fonts/" + kDefaultFontFileName)) {
+		throw runtime_error("Failed to open the default font file.");
 	}
 	text_size_ = kDefaultTextSize;
 }
