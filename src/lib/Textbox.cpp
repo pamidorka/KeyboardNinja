@@ -78,7 +78,10 @@ void TextboxModel::NewWord() {
 
 void TextboxModel::LoadList() {
 	std::string word = settings_->GetWordAt(rand() % settings_->GetVocabularySize());
-	list_string_.push_back(word);
+	while (list_string_.size() < 5) {
+		list_string_.push_back(word);
+		word = settings_->GetWordAt(rand() % settings_->GetVocabularySize());
+	}
 }
 
 void TextboxModel::ChangeCharColor(const sf::Color _color) {
