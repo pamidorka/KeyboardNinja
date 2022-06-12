@@ -17,3 +17,5 @@ Settings.o
 Textbox.d
 Textbox.o
 master
+
+Textboxold.cpp

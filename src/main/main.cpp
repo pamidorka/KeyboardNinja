@@ -6,7 +6,7 @@ int main() {
     sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(1200, 600), "Keyboard Ninja", Style::Close);
     VirtualKeyboard* keyboard = new VirtualKeyboard("Roboto-Regular.ttf");
 	Settings* settings = new Settings;
-	Textbox* textbox = new Textbox(settings);
+	TextboxView* textbox = new TextboxView(settings);
 
     while (window->isOpen()) {
         sf::Event event;
@@ -16,7 +16,7 @@ int main() {
             }
 			if (event.type == sf::Event::KeyPressed) {
 				keyboard->ChangePressedKey(event.key.code);
-				textbox->MovePointer(event.key.code);
+				textbox->InteractionTexboxModel(event.key.code);
 			}
 			if (event.type == sf::Event::KeyReleased) {
 				keyboard->ChangeReleasedKey(event.key.code);
