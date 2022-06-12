@@ -4,12 +4,9 @@
 
 TextboxView::TextboxView(Settings* _settings) {
 	this->settings_ = _settings;
-	this->font_ = this->settings_->GetFont();
-	this->size_of_character_ = this->settings_->GetTextSize();
+	SetPosition(1200 / 4, 600 / 3);
 
 	this->model_ = new TextboxModel(_settings);
-	this->model_->LoadList(this->settings_);
-	this->model_->NewWord();
 }
 
 
@@ -23,14 +20,38 @@ void TextboxView::SetPosition(double _x, double _y) {
 }
 
 void TextboxView::SetSize(double _width, double _height) {
-	this->textbox_size_.x = _width;
-	this->textbox_size_.y = _height;
+	this->size_.x = _width;
+	this->size_.y = _height;
+}
+
+void TextboxView::Draw(sf::RenderWindow* _window) {
+	sf::Text text;
+	double dx = 0;
+	text.setFont(this->settings_->GetFont());
+	text.setCharacterSize(this->settings_->GetTextSize());
+	for (size_t i = 0; i < this->model_->GetUsedStr().size(); i++) {
+		text.setFillColor(this->model_->GetUsedStr()[i].color);
+		text.setString(this->model_->GetUsedStr()[i].character);
+		text.setPosition(position_.x + dx, position_.y);
+		dx += this->settings_->GetFont().getGlyph(this->model_->GetUsedStr()[i].character, this->settings_->GetTextSize(), false, 0).advance;
+		_window->draw(text);
+	}
+	dx += 10;
+	for (auto i = this->model_->GetList().cbegin(); i != this->model_->GetList().cend(); i++) {
+		text.setFillColor(sf::Color(190, 190, 190));
+		text.setString((*i));
+		text.setPosition(position_.x + dx, position_.y);
+		dx += text.getLocalBounds().width + 10;
+		_window->draw(text);
+	}
 }
 
 //texboxmodel functions
 
 TextboxModel::TextboxModel(Settings* _settings) {
 	this->settings_ = _settings;
+	LoadList();
+	NewWord();
 }
 
 void TextboxModel::MovePointer(int _key_code) {
@@ -44,4 +65,35 @@ void TextboxModel::MovePointer(int _key_code) {
 		ChangeCharColor(sf::Color(190, 190, 190));
 	}
 	if ((size_t)pointer_ > used_str_.size()) NewWord();
+}
+
+void TextboxModel::NewWord() {
+	std::string temp = list_string_.front();
+	list_string_.pop_front();
+	LoadList();
+	used_str_.clear();
+	std::transform(temp.begin(), temp.end(), std::back_inserter(used_str_), [](char c) { return TextChar{ Color(190, 190, 190), c }; });
+	pointer_ = 0;
+}
+
+void TextboxModel::LoadList() {
+	std::string word = settings_->GetWordAt(rand() % settings_->GetVocabularySize());
+	list_string_.push_back(word);
+}
+
+void TextboxModel::ChangeCharColor(const sf::Color _color) {
+	used_str_[pointer_].color = _color;
+}
+
+void TextboxModel::ChooseCharColor(const int _key) {
+	if ((int)('a' + _key) == (int)used_str_[pointer_].character) ChangeCharColor(sf::Color::Black);
+	else ChangeCharColor(sf::Color::Red);
+}
+
+const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
+	return this->used_str_;
+}
+
+const std::list <std::string>& TextboxModel::GetList() {
+	return this->list_string_;
 }
