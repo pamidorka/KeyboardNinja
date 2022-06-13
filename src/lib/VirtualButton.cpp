@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "VirtualButton.h"
 
 Button::Button(const double _width, const double _height, const double _x, const double _y, const int _character) {
 	SetSize(_width, _height);

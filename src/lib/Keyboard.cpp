@@ -1,9 +1,10 @@
 #include "Keyboard.h"
 
-VirtualKeyboard::VirtualKeyboard(std::string _font_name) {
-	buttons_ = new Button[27];
+VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
+	buttons_ = new Button[kNumberOfButtons_];
+	this->settings_ = _settings;
 
-	for (int i = 0, j = 'a'; i <= 25; j++, i++) {
+	for (int i = 0, j = 'a'; i < kNumberOfButtons_ - 1; j++, i++) {
 		buttons_[i].SetKeyCode(i);
 		buttons_[i].SetCharacter(j);
 		buttons_[i].SetColor(sf::Color::White);
@@ -42,11 +43,6 @@ VirtualKeyboard::VirtualKeyboard(std::string _font_name) {
 		buttons_[26].SetColor(sf::Color::White);
 		buttons_[26].SetCharacter(' ');
 		buttons_[26].SetSize(4 * (60 + kSizeOfOutline_) - 1, 60);
-	}
-
-	if (!keyboard_font_.loadFromFile("src/fonts/" + _font_name)) {
-		std::cout << "font not loaded" << std::endl;
-		throw std::runtime_error("font not loaded");
 	}
 
 	SetPosition(300, 300);
@@ -90,22 +86,22 @@ VirtualKeyboard::Position VirtualKeyboard::GetPosition() {
 }
 
 void VirtualKeyboard::Draw(sf::RenderWindow* _window) {
-	for (int i = 0; i < 27; i++) {
-		sf::RectangleShape butt;
-		butt.setSize(sf::Vector2f(buttons_[i].GetSize().x, buttons_[i].GetSize().y));
-		butt.setPosition(sf::Vector2f(position_.x + buttons_[i].GetPosition().x, position_.y + buttons_[i].GetPosition().y));
-		butt.setFillColor(buttons_[i].GetColor());
-		butt.setOutlineThickness(kSizeOfOutline_);
-		butt.setOutlineColor(sf::Color::Black);
+	for (int i = 0; i < kNumberOfButtons_; i++) {
+		sf::RectangleShape btn;
+		btn.setSize(sf::Vector2f(buttons_[i].GetSize().x, buttons_[i].GetSize().y));
+		btn.setPosition(sf::Vector2f(position_.x + buttons_[i].GetPosition().x, position_.y + buttons_[i].GetPosition().y));
+		btn.setFillColor(buttons_[i].GetColor());
+		btn.setOutlineThickness(kSizeOfOutline_);
+		btn.setOutlineColor(sf::Color::Black);
 
 		sf::Text text;
-		text.setFont(keyboard_font_);
+		text.setFont(this->settings_->GetDefaultFont());
 		text.setCharacterSize(kSizeOfCharacter_);
 		text.setString((char)toupper(buttons_[i].GetCharacter()));
 		text.setPosition(sf::Vector2f(position_.x + buttons_[i].GetPosition().x + 5, position_.y + buttons_[i].GetPosition().y + 3));
 		text.setFillColor(buttons_[i].GetCharacterColor());
 
-		_window->draw(butt);
+		_window->draw(btn);
 		_window->draw(text);
 	}
 }

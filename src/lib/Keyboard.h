@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Button.h"
+#include "VirtualButton.h"
+#include "Settings.h"
 #include <iostream>
 #include <exception>
 #include <string>
@@ -14,7 +15,7 @@ private:
 	};
 
 	Button* buttons_;
-	sf::Font keyboard_font_;
+	Settings* settings_;
 	Position position_;
 	const int kNumberOfButtons_ = 27;
 	const size_t kSizeOfCharacter_ = 30;
@@ -22,7 +23,7 @@ private:
 
 public:
 
-	VirtualKeyboard(std::string _font_name);
+	VirtualKeyboard(Settings* _settings);
 	void SetPosition(const double _x, const double _y);
 	void ChangePressedKey(const int _key);
 	void ChangeReleasedKey(const int _key);

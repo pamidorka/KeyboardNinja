@@ -4,7 +4,7 @@ const string Settings::kDefaultVocabularyFileName = "vocab.txt";
 const string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
 const unsigned int Settings::kDefaultTextSize = 24;
 
-bool Settings::LoadDefaultFont() {
+void Settings::LoadDefaultFont() {
 	if (!default_font_.loadFromFile("src/fonts/" + kDefaultFontFileName)) {
 		throw runtime_error("Failed to open the default font file.");
 	}
