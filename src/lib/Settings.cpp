@@ -1,6 +1,6 @@
 #include "Settings.h"
 
-const string Settings::kDefaultVocabularyFileName = "vocab.txt";
+const string Settings::kDefaultVocabularyFileName = "Easy.txt";
 const string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
 const unsigned int Settings::kDefaultTextSize = 24;
 
@@ -11,7 +11,7 @@ void Settings::LoadDefaultFont() {
 }
 
 Settings::Settings() {
-	if (!LoadVocabularyFromCSV("src/wordbase/" + kDefaultVocabularyFileName)) {
+	if (!LoadVocabularyFromCSV(kDefaultVocabularyFileName)) {
 		throw runtime_error("Failed to open the default vocabulary file.");
 	}
 	LoadDefaultFont();
@@ -26,7 +26,7 @@ Settings::Settings(vector<string> _vocabulary, Font _font, unsigned int _textSiz
 
 bool Settings::LoadVocabularyFromCSV(string _file_name) {
 	ifstream file;
-	file.open(_file_name, ifstream::in);
+	file.open("src/wordbase/" + _file_name, ifstream::in);
 
 	if (!file.is_open()) {
 		cerr << "Can't open the file \"" << _file_name << "\"." << endl;
