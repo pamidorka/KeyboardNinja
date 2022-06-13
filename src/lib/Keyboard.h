@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Button.h"
+#include "VirtualButton.h"
 #include "Settings.h"
 #include <iostream>
 #include <exception>
