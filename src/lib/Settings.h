@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <exception>
 #include <fstream>
@@ -11,8 +12,11 @@ using namespace std;
 class Settings {
 private:
 	vector<string> vocabulary_;
+	Font default_font_;
 	Font font_;
 	unsigned int text_size_;
+
+	bool LoadDefaultFont();
 public:
 	static const string kDefaultVocabularyFileName; // CSV file
 	static const string kDefaultFontFileName;
@@ -28,5 +32,6 @@ public:
 	size_t GetVocabularySize();
 	const string& GetWordAt(size_t _pos);
 	const Font& GetFont();
+	const Font& GetDefaultFont();
 	unsigned int GetTextSize();
 };

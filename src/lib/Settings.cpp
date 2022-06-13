@@ -4,18 +4,24 @@ const string Settings::kDefaultVocabularyFileName = "vocab.txt";
 const string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
 const unsigned int Settings::kDefaultTextSize = 24;
 
+bool Settings::LoadDefaultFont() {
+	if (!default_font_.loadFromFile("src/fonts/" + kDefaultFontFileName)) {
+		throw runtime_error("Failed to open the default font file.");
+	}
+}
+
 Settings::Settings() {
 	if (!LoadVocabularyFromCSV("src/wordbase/" + kDefaultVocabularyFileName)) {
 		throw runtime_error("Failed to open the default vocabulary file.");
 	}
-	if (!LoadFont("src/fonts/" + kDefaultFontFileName)) {
-		throw runtime_error("Failed to open the default font file.");
-	}
+	LoadDefaultFont();
+
+	font_ = default_font_;
 	text_size_ = kDefaultTextSize;
 }
 
 Settings::Settings(vector<string> _vocabulary, Font _font, unsigned int _textSize) : vocabulary_(_vocabulary), font_(_font), text_size_(_textSize) {
-
+	LoadDefaultFont();
 }
 
 bool Settings::LoadVocabularyFromCSV(string _file_name) {
@@ -42,7 +48,7 @@ bool Settings::LoadVocabularyFromCSV(string _file_name) {
 }
 
 bool Settings::LoadFont(string _file_name) {
-	return font_.loadFromFile(_file_name);
+	return font_.loadFromFile("src/fonts/" + _file_name);
 }
 
 void Settings::SetTextSize(unsigned int _text_size) {
@@ -63,6 +69,10 @@ const string& Settings::GetWordAt(size_t _pos) {
 
 const Font& Settings::GetFont() {
 	return font_;
+}
+
+const Font& Settings::GetDefaultFont() {
+	return default_font_;
 }
 
 unsigned int Settings::GetTextSize() {
