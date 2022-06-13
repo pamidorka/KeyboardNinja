@@ -1,6 +1,6 @@
 #pragma once
-#include "../Settings.h"
-#include "../Buttons/MultipleButtons.h"
+#include "lib/Settings.h"
+#include "lib/Buttons/MultipleButtons.h"
 
 class SettingsWindow {
 private:

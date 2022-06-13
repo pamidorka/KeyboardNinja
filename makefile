@@ -4,28 +4,43 @@ FF = -I src
 CPPF = -MMD
 CF = -Wall -Wextra -Werror
 
-BUTTON = src/lib/VirtualButton.cpp
+VIRTUALBUTTON = src/lib/VirtualButton.cpp
 KEYBOARD = src/lib/Keyboard.cpp
 SETTINGS = src/lib/Settings.cpp
 TEXTBOX = src/lib/Textbox.cpp
+MAINWINDOW = src/lib/Windows/MainWindow.cpp
+SETTINGSWINDOW = src/lib/Windows/SettingsWindow.cpp
+BUTTON = src/lib/Buttons/Button.cpp
+TOGGLEBUTTON = src/lib/Buttons/ToggleButton.cpp
+MULTIPLEBUTTONS = src/lib/Buttons/MultipleButtons.cpp
 
 MAIN = src/main/main.cpp
 
 SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
-COMPILE = obj/main/main.o obj/lib/VirtualButton.o obj/lib/Keyboard.o obj/lib/Settings.o obj/lib/Textbox.o
+COMPILE = obj/main/main.o obj/lib/VirtualButton.o obj/lib/Keyboard.o obj/lib/Settings.o obj/lib/Textbox.o obj/lib/MainWindow.o obj/lib/SettingsWindow.o obj/lib/Button.o obj/lib/MultipleButtons.o obj/lib/ToggleButton.o
 
 bin/master: $(COMPILE) $(SFML)
 	$(CPP) $(COMPILE) $(SFML) -o $@
 obj/main/main.o: $(MAIN) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(MAIN)
-obj/lib/VirtualButton.o: $(BUTTON) $(SFML)
-	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(BUTTON)
+obj/lib/VirtualButton.o: $(VIRTUALBUTTON) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(VIRTUALBUTTON)
 obj/lib/Keyboard.o: $(KEYBOARD) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(KEYBOARD)
 obj/lib/Settings.o: $(SETTINGS) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(SETTINGS)
 obj/lib/Textbox.o: $(TEXTBOX) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(TEXTBOX)
+obj/lib/MainWindow.o: $(MAINWINDOW) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(MAINWINDOW)
+obj/lib/SettingsWindow.o: $(SETTINGSWINDOW) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(SETTINGSWINDOW)
+obj/lib/Button.o: $(BUTTON) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(BUTTON)
+obj/lib/ToggleButton.o: $(TOGGLEBUTTON) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(TOGGLEBUTTON)
+obj/lib/MultipleButtons.o: $(MULTIPLEBUTTONS) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(MULTIPLEBUTTONS)
 
--include Keyboard.d Button.d Settings.d main.d
+-include Keyboard.d Button.d Settings.d main.d MainWindow.d SettingsWindow.d Button.d MultipleButtons.d ToggleButton.d

@@ -9,8 +9,12 @@ TextboxView::TextboxView(Settings* _settings) {
 	this->model_ = new TextboxModel(_settings);
 }
 
+TextboxView::~TextboxView() {
+	delete model_;
+}
 
-void TextboxView::InteractionTexboxModel(int _key_code) {
+
+void TextboxView::InteractionTextboxModel(int _key_code) {
 	this->model_->MovePointer(_key_code);
 }
 
