@@ -6,8 +6,8 @@ SFML-2.5.1
 
 # objects files
 
-Button.d
-Button.o
+VirtualButton.d
+VirtualButton.o
 Keyboard.d
 Keyboard.o
 main.d
@@ -16,6 +16,16 @@ Settings.d
 Settings.o
 Textbox.d
 Textbox.o
+MainWindow.d
+MainWindow.o
+MultipleButtons.d
+MultipleButtons.o
+SettingsWindow.d
+SettingsWindow.o
+ToggleButton.d
+ToggleButton.o
+Button.d
+Button.o
 master
 
-Textboxold.cpp
+

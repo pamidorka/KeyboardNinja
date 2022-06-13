@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 
 VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
-	buttons_ = new Button[kNumberOfButtons_];
+	buttons_ = new VirtualButton[kNumberOfButtons_];
 	this->settings_ = _settings;
 
 	for (int i = 0, j = 'a'; i < kNumberOfButtons_ - 1; j++, i++) {
@@ -11,33 +11,33 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 	}
 
 	{
-		buttons_[0].SetPosistion(0, 60 + kSizeOfOutline_);
-		buttons_[1].SetPosistion(4 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
-		buttons_[2].SetPosistion(2 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
-		buttons_[3].SetPosistion(2 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[4].SetPosistion(2 * (60 + kSizeOfOutline_), 0);
-		buttons_[5].SetPosistion(3 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[6].SetPosistion(4 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[7].SetPosistion(5 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[8].SetPosistion(7 * (60 + kSizeOfOutline_), 0);
-		buttons_[9].SetPosistion(6 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[10].SetPosistion(7 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[11].SetPosistion(8 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
-		buttons_[12].SetPosistion(6 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
-		buttons_[13].SetPosistion(5 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
-		buttons_[14].SetPosistion(8 * (60 + kSizeOfOutline_), 0);
-		buttons_[15].SetPosistion(9 * (60 + kSizeOfOutline_), 0);
-		buttons_[16].SetPosistion(0, 0);
-		buttons_[17].SetPosistion(3 * (60 + kSizeOfOutline_), 0);
-		buttons_[18].SetPosistion(60 + kSizeOfOutline_, 60 + kSizeOfOutline_);
-		buttons_[19].SetPosistion(4 * (60 + kSizeOfOutline_), 0);
-		buttons_[20].SetPosistion(6 * (60 + kSizeOfOutline_), 0);
-		buttons_[21].SetPosistion(3 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
-		buttons_[22].SetPosistion(60 + kSizeOfOutline_, 0);
-		buttons_[23].SetPosistion(60 + kSizeOfOutline_, 2 * (60 + kSizeOfOutline_));
-		buttons_[24].SetPosistion(5 * (60 + kSizeOfOutline_), 0);
-		buttons_[25].SetPosistion(0, 120 + 2);
-		buttons_[26].SetPosistion(60 + kSizeOfOutline_, 3 * (60 + kSizeOfOutline_));
+		buttons_[0].SetPosition(0, 60 + kSizeOfOutline_);
+		buttons_[1].SetPosition(4 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
+		buttons_[2].SetPosition(2 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
+		buttons_[3].SetPosition(2 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[4].SetPosition(2 * (60 + kSizeOfOutline_), 0);
+		buttons_[5].SetPosition(3 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[6].SetPosition(4 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[7].SetPosition(5 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[8].SetPosition(7 * (60 + kSizeOfOutline_), 0);
+		buttons_[9].SetPosition(6 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[10].SetPosition(7 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[11].SetPosition(8 * (60 + kSizeOfOutline_), 60 + kSizeOfOutline_);
+		buttons_[12].SetPosition(6 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
+		buttons_[13].SetPosition(5 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
+		buttons_[14].SetPosition(8 * (60 + kSizeOfOutline_), 0);
+		buttons_[15].SetPosition(9 * (60 + kSizeOfOutline_), 0);
+		buttons_[16].SetPosition(0, 0);
+		buttons_[17].SetPosition(3 * (60 + kSizeOfOutline_), 0);
+		buttons_[18].SetPosition(60 + kSizeOfOutline_, 60 + kSizeOfOutline_);
+		buttons_[19].SetPosition(4 * (60 + kSizeOfOutline_), 0);
+		buttons_[20].SetPosition(6 * (60 + kSizeOfOutline_), 0);
+		buttons_[21].SetPosition(3 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
+		buttons_[22].SetPosition(60 + kSizeOfOutline_, 0);
+		buttons_[23].SetPosition(60 + kSizeOfOutline_, 2 * (60 + kSizeOfOutline_));
+		buttons_[24].SetPosition(5 * (60 + kSizeOfOutline_), 0);
+		buttons_[25].SetPosition(0, 120 + 2);
+		buttons_[26].SetPosition(60 + kSizeOfOutline_, 3 * (60 + kSizeOfOutline_));
 
 		buttons_[26].SetKeyCode(57);
 		buttons_[26].SetColor(sf::Color::White);
@@ -49,6 +49,7 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 }
 
 void VirtualKeyboard::SetPosition(const double _x, const double _y) {
+	std::cout << _x << " " << _y << std::endl;
 	this->position_.x = _x;
 	this->position_.y = _y;
 }
@@ -106,7 +107,7 @@ void VirtualKeyboard::Draw(sf::RenderWindow* _window) {
 	}
 }
 
-Button* VirtualKeyboard::GetButtons() {
+VirtualButton* VirtualKeyboard::GetButtons() {
 	return this->buttons_;
 }
 

@@ -8,10 +8,10 @@ void MultipleButtons::AddButton(ToggleButton& _button) {
 	buttons_.push_back(_button);
 }
 
-void MultipleButtons::SetActiveButtonId(int _id) {
+void MultipleButtons::SetActiveButtonId(size_t _id) {
 	active_button_id_ = _id;
 
-	for (int i = 0; i < buttons_.size(); i++) {
+	for (size_t i = 0; i < buttons_.size(); i++) {
 		buttons_[i].Toggle(i == _id);
 	}
 }
@@ -22,7 +22,7 @@ int MultipleButtons::GetActiveButtonId() {
 
 bool MultipleButtons::Update(const Vector2f _mouse_pos) {
 	bool result = false;
-	for (int i = 0; i < buttons_.size(); i++) {
+	for (size_t i = 0; i < buttons_.size(); i++) {
 		if (buttons_[i].Update(_mouse_pos)) {
 			active_button_id_ = i;
 			result = true;
@@ -34,7 +34,7 @@ bool MultipleButtons::Update(const Vector2f _mouse_pos) {
 }
 
 void MultipleButtons::Render(RenderTarget* _target) {
-	for (int i = 0; i < buttons_.size(); i++) {
+	for (size_t i = 0; i < buttons_.size(); i++) {
 		buttons_[i].Render(_target);
 	}
 }

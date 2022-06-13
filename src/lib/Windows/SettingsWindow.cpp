@@ -30,12 +30,13 @@ SettingsWindow::SettingsWindow(Settings& _settings) : settings_(&_settings),
 
 void SettingsWindow::Show() {
     window_.create(VideoMode(600, 400), "Settings", Style::Close);
+    settings_->SetTextSize(Settings::kDefaultTextSize);
 
     settings_->LoadFont(settings_->kDefaultFontFileName);
-    text_font_buttons_.SetActiveButtonId(0);
+    text_font_buttons_.SetActiveButtonId(0u);
 
     settings_->LoadVocabularyFromCSV(settings_->kDefaultVocabularyFileName);
-    difficulty_buttons_.SetActiveButtonId(0);
+    difficulty_buttons_.SetActiveButtonId(0u);
 
     while (window_.isOpen()) {
         Event event;
