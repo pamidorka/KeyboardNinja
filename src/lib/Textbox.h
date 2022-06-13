@@ -59,8 +59,9 @@ private:
 public:
 
 	TextboxView(Settings* _settings);
+	~TextboxView();
 
-	void InteractionTexboxModel(int _key_code);
+	void InteractionTextboxModel(int _key_code);
 	void Draw(sf::RenderWindow* _window);
 	void SetSize(const double _width, const double _height);
 	void SetPosition(const double _width, const double _height);

@@ -6,7 +6,7 @@ MainWindow::MainWindow() {
 	settings_ = new Settings;
 	keyboard_ = new VirtualKeyboard(settings_);
 	textbox_ = new TextboxView(settings_);
-	settings_btn_ = new Button(50, 50, 150, 60, &this->settings_->GetDefaultFont(), "Settings", this->settings_->kDefaultTextSize, MainWindow::kColorsSettingsBtn);
+	settings_btn_ = new Button(1000, 50, 150, 50, &this->settings_->GetDefaultFont(), "Settings", this->settings_->kDefaultTextSize, MainWindow::kColorsSettingsBtn);
 	mouse_pos_ = Vector2f(-1, -1);
 }
 
@@ -39,7 +39,7 @@ void MainWindow::Show() {
 			}
 			if (event.type == sf::Event::KeyPressed) {
 				keyboard_->ChangePressedKey(event.key.code);
-				textbox_->InteractionTexboxModel(event.key.code);
+				textbox_->InteractionTextboxModel(event.key.code);
 			}
 			if (event.type == sf::Event::KeyReleased) {
 				keyboard_->ChangeReleasedKey(event.key.code);

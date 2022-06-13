@@ -24,10 +24,11 @@ private:
 public:
 
 	VirtualKeyboard(Settings* _settings);
+	~VirtualKeyboard();
+
 	void SetPosition(const double _x, const double _y);
 	void ChangePressedKey(const int _key);
 	void ChangeReleasedKey(const int _key);
-	VirtualButton* GetButtons();
 	Position GetPosition();
 	void Draw(sf::RenderWindow* _window);
 

@@ -48,6 +48,10 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 	SetPosition(300, 300);
 }
 
+VirtualKeyboard::~VirtualKeyboard() {
+	delete[] buttons_;
+}
+
 void VirtualKeyboard::SetPosition(const double _x, const double _y) {
 	std::cout << _x << " " << _y << std::endl;
 	this->position_.x = _x;
@@ -104,10 +108,8 @@ void VirtualKeyboard::Draw(sf::RenderWindow* _window) {
 
 		_window->draw(btn);
 		_window->draw(text);
+		SetPosition(300, 300);
 	}
 }
 
-VirtualButton* VirtualKeyboard::GetButtons() {
-	return this->buttons_;
-}
 
