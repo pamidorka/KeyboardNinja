@@ -4,8 +4,8 @@
 
 int main() {
     sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(1200, 600), "Keyboard Ninja", Style::Close);
-    VirtualKeyboard* keyboard = new VirtualKeyboard("Roboto-Regular.ttf");
 	Settings* settings = new Settings;
+    VirtualKeyboard* keyboard = new VirtualKeyboard(settings);
 	TextboxView* textbox = new TextboxView(settings);
 
     while (window->isOpen()) {

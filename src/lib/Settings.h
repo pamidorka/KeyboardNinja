@@ -16,7 +16,7 @@ private:
 	Font font_;
 	unsigned int text_size_;
 
-	bool LoadDefaultFont();
+	void LoadDefaultFont();
 public:
 	static const string kDefaultVocabularyFileName; // CSV file
 	static const string kDefaultFontFileName;
