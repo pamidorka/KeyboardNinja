@@ -13,12 +13,13 @@ SETTINGSWINDOW = src/lib/Windows/SettingsWindow.cpp
 BUTTON = src/lib/Buttons/Button.cpp
 TOGGLEBUTTON = src/lib/Buttons/ToggleButton.cpp
 MULTIPLEBUTTONS = src/lib/Buttons/MultipleButtons.cpp
+STATISTIC = src/lib/Statistic.cpp
 
 MAIN = src/main/main.cpp
 
 SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
-COMPILE = obj/main/main.o obj/lib/VirtualButton.o obj/lib/Keyboard.o obj/lib/Settings.o obj/lib/Textbox.o obj/lib/MainWindow.o obj/lib/SettingsWindow.o obj/lib/Button.o obj/lib/MultipleButtons.o obj/lib/ToggleButton.o
+COMPILE = obj/main/main.o obj/lib/VirtualButton.o obj/lib/Keyboard.o obj/lib/Settings.o obj/lib/Textbox.o obj/lib/MainWindow.o obj/lib/SettingsWindow.o obj/lib/Button.o obj/lib/MultipleButtons.o obj/lib/ToggleButton.o obj/lib/Statistic.o
 
 bin/master: $(COMPILE) $(SFML)
 	$(CPP) $(COMPILE) $(SFML) -o $@
@@ -42,5 +43,7 @@ obj/lib/ToggleButton.o: $(TOGGLEBUTTON) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(TOGGLEBUTTON)
 obj/lib/MultipleButtons.o: $(MULTIPLEBUTTONS) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(MULTIPLEBUTTONS)
+obj/lib/Statistic.o: $(STATISTIC) $(SFML)
+	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(STATISTIC)
 
--include Keyboard.d Button.d Settings.d main.d MainWindow.d SettingsWindow.d Button.d MultipleButtons.d ToggleButton.d
+-include Keyboard.d Button.d Settings.d main.d MainWindow.d SettingsWindow.d Button.d MultipleButtons.d ToggleButton.d Statistic.d

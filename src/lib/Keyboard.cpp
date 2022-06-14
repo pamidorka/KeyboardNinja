@@ -53,7 +53,6 @@ VirtualKeyboard::~VirtualKeyboard() {
 }
 
 void VirtualKeyboard::SetPosition(const double _x, const double _y) {
-	std::cout << _x << " " << _y << std::endl;
 	this->position_.x = _x;
 	this->position_.y = _y;
 }

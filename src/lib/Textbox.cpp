@@ -13,7 +13,6 @@ TextboxView::~TextboxView() {
 	delete model_;
 }
 
-
 void TextboxView::InteractionTextboxModel(int _key_code) {
 	this->model_->MovePointer(_key_code);
 }
@@ -42,7 +41,7 @@ void TextboxView::Draw(sf::RenderWindow* _window) {
 	}
 	dx += 10;
 	for (auto i = this->model_->GetList().cbegin(); i != this->model_->GetList().cend(); i++) {
-		text.setFillColor(sf::Color(190, 190, 190));
+		text.setFillColor(this->model_->kStandartCharColor);
 		text.setString((*i));
 		text.setPosition(position_.x + dx, position_.y);
 		dx += text.getLocalBounds().width + 10;
@@ -50,25 +49,43 @@ void TextboxView::Draw(sf::RenderWindow* _window) {
 	}
 }
 
+void TextboxView::DrawStatictic(sf::RenderWindow* _window) {
+	sf::Text text;
+	text.setFont(this->settings_->GetDefaultFont());
+	text.setFillColor(Color::Black);
+	text.setString("WPM " + this->model_->GetStatistic().GetWPM());
+	text.setPosition(1200 / 2, 600 / 2);
+
+	_window->draw(text);
+}
+
 //texboxmodel functions
 
 TextboxModel::TextboxModel(Settings* _settings) {
 	this->settings_ = _settings;
+	this->statistic_ = new Statistic(_settings);
+
 	LoadList();
 	NewWord();
 }
 
+TextboxModel::~TextboxModel() {
+	delete statistic_;
+}
+
 void TextboxModel::MovePointer(int _key_code) {
 	if (_key_code == 57) NewWord();
-	if (_key_code < 26 && _key_code > -1) {
-		ChooseCharColor(_key_code);
-		pointer_++;
+	if (_key_code < 26 && _key_code >= 0) {
+		if ((sizet)pointer >= usedstr.size()) NewWord();
+		else {
+			ChooseCharColor(_keycode);
+			pointer++;
+		}
 	}
-	if (_key_code == 59 && pointer_ > 0) {
+	if (_keycode == 59 && pointer > 0) {
 		pointer_--;
-		ChangeCharColor(sf::Color(190, 190, 190));
+		ChangeCharColor(this->kStandartCharColor);
 	}
-	if ((size_t)pointer_ > used_str_.size()) NewWord();
 }
 
 void TextboxModel::NewWord() {
@@ -76,7 +93,7 @@ void TextboxModel::NewWord() {
 	list_string_.pop_front();
 	LoadList();
 	used_str_.clear();
-	std::transform(temp.begin(), temp.end(), std::back_inserter(used_str_), [](char c) { return TextChar{ Color(190, 190, 190), c }; });
+	std::transform(temp.begin(), temp.end(), std::back_inserter(used_str_), [](char c) { return TextChar{ kStandartCharColor, c }; });
 	pointer_ = 0;
 }
 
@@ -93,8 +110,12 @@ void TextboxModel::ChangeCharColor(const sf::Color _color) {
 }
 
 void TextboxModel::ChooseCharColor(const int _key) {
-	if ((int)('a' + _key) == (int)used_str_[pointer_].character) ChangeCharColor(sf::Color::Black);
-	else ChangeCharColor(sf::Color::Red);
+	if ((int)('a' + _key) == (int)used_str_[pointer_].character) { 
+		ChangeCharColor(sf::Color::Black); 
+	}
+	else {
+		ChangeCharColor(sf::Color::Red);
+	}
 }
 
 const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
@@ -103,4 +124,8 @@ const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
 
 const std::list <std::string>& TextboxModel::GetList() {
 	return this->list_string_;
+}
+
+const Statistic& TextboxModel::GetStatistic() {
+	return this->statistic_;
 }
