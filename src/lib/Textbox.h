@@ -27,8 +27,9 @@ public:
 
 	TextboxModel(Settings* _settings);
 
-	void MovePointer(int _key_code);
-	void ChooseCharColor(const int _key);
+	void MovePointer(int _key_code, bool _shift_pressed);
+	void ChooseCharColor(const int _key, bool _shift_pressed);
+	bool CheckCharCorrect(int _key_code, bool _shift_pressed);
 	void ChangeCharColor(const sf::Color _color);
 	void LoadList();
 	void NewWord();
@@ -60,7 +61,7 @@ public:
 	TextboxView(Settings* _settings);
 	~TextboxView();
 
-	void InteractionTextboxModel(int _key_code);
+	void InteractionTextboxModel(int _key_code, bool _shift_pressed);
 	void Restart();
 	void Draw(sf::RenderWindow* _window);
 	void SetSize(const double _width, const double _height);

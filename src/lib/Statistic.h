@@ -14,6 +14,8 @@ private:
 	int char_count_;
 	int error_count_;
 
+	string ClockFormatString(double _seconds_total);
+
 public:
 
 	Statistic(Settings* _settings);

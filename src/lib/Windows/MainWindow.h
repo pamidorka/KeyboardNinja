@@ -21,6 +21,7 @@ private:
 	Button* settings_btn_;
 	Statistic* statistic_;
 
+	bool shift_pressed_ = false;
 	TestState state_;
 	Vector2f mouse_pos_;
 

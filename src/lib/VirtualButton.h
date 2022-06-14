@@ -10,7 +10,7 @@ private:
 	};
 
 	int keycode_;
-	char character_;
+	std::string character_;
 	sf::Color color_;
 	sf::Color character_color_;
 	Options size_;
@@ -22,11 +22,11 @@ public:
 	void SetSize(const double _width, const double _height);
 	void SetKeyCode(const int _character);
 	void SetPosition(const double _width, const double _height);
-	void SetCharacter(const char _symbol);
+	void SetCharacter(std::string _symbol);
 	void SetColor(const sf::Color _color);
 	void SetCharacterColor(const sf::Color _color);
 	int GetKeyCode();
-	char GetCharacter();
+	std::string GetCharacter();
 	Options GetSize();
 	Options GetPosition();
 	sf::Color GetColor();

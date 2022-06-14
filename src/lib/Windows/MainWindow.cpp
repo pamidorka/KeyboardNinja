@@ -24,6 +24,7 @@ void MainWindow::Reset() {
 	state_ = TestState::WAITING;
 	statistic_->Restart();
 	textbox_->Restart();
+	keyboard_->Reset();
 }
 
 void MainWindow::Render() {
@@ -60,17 +61,23 @@ void MainWindow::Show() {
 				if (event.key.code == sf::Keyboard::Enter) {
 					Reset();
 				}
+				if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift) {
+					shift_pressed_ = true;
+				}
 				if (state_ == TestState::WAITING && ((event.key.code < 26 && event.key.code > -1) || event.key.code == 57)) {
 					state_ = TestState::TESTING;
 					statistic_->Restart();
 				}
 				if (state_ == TestState::TESTING) {
 					keyboard_->ChangePressedKey(event.key.code);
-					textbox_->InteractionTextboxModel(event.key.code);
+					textbox_->InteractionTextboxModel(event.key.code, shift_pressed_);
 					statistic_->Count(event.key.code);
 				}
 			}
 			if (event.type == sf::Event::KeyReleased) {
+				if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Keyboard::RShift) {
+					shift_pressed_ = false;
+				}
 				if (state_ == TestState::TESTING) {
 					keyboard_->ChangeReleasedKey(event.key.code);
 				}
