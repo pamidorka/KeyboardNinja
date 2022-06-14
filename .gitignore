@@ -26,6 +26,8 @@ ToggleButton.d
 ToggleButton.o
 Button.d
 Button.o
+Statistic.o
+Statistic.d
 master
 
 

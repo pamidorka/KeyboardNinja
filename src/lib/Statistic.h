@@ -19,8 +19,7 @@ public:
 	Statistic(Settings* _settings);
 
 	void Restart();
-	void AddCharCount();
-	void AddErrorCount();
+	void Count(int _key_code);
 	void TimeUpdate();
 	void DrawRemainingTime(sf::RenderWindow* _window);
 	void Draw(sf::RenderWindow* _window);

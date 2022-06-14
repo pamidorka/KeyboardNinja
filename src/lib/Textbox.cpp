@@ -1,5 +1,7 @@
 #include "Textbox.h"
 
+const sf::Color TextboxModel::kStandartCharColor = sf::Color(190, 190, 190);
+
 //texboxview functions
 
 TextboxView::TextboxView(Settings* _settings) {
@@ -49,28 +51,17 @@ void TextboxView::Draw(sf::RenderWindow* _window) {
 	}
 }
 
-void TextboxView::DrawStatictic(sf::RenderWindow* _window) {
-	sf::Text text;
-	text.setFont(this->settings_->GetDefaultFont());
-	text.setFillColor(Color::Black);
-	text.setString("WPM " + this->model_->GetStatistic().GetWPM());
-	text.setPosition(1200 / 2, 600 / 2);
-
-	_window->draw(text);
+void TextboxView::Restart() {
+	this->model_->Restart();
 }
 
 //texboxmodel functions
 
 TextboxModel::TextboxModel(Settings* _settings) {
 	this->settings_ = _settings;
-	this->statistic_ = new Statistic(_settings);
 
 	LoadList();
 	NewWord();
-}
-
-TextboxModel::~TextboxModel() {
-	delete statistic_;
 }
 
 void TextboxModel::MovePointer(int _key_code) {
@@ -95,6 +86,12 @@ void TextboxModel::NewWord() {
 	used_str_.clear();
 	std::transform(temp.begin(), temp.end(), std::back_inserter(used_str_), [](char c) { return TextChar{ kStandartCharColor, c }; });
 	pointer_ = 0;
+}
+
+void TextboxModel::Restart() {
+	this->list_string_.clear();
+	LoadList();
+	NewWord();
 }
 
 void TextboxModel::LoadList() {
@@ -124,8 +121,4 @@ const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
 
 const std::list <std::string>& TextboxModel::GetList() {
 	return this->list_string_;
-}
-
-const Statistic& TextboxModel::GetStatistic() {
-	return this->statistic_;
 }

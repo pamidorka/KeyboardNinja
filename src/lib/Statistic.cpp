@@ -11,12 +11,13 @@ void Statistic::Restart() {
 	this->error_count_ = 0;
 }
 
-void Statistic::AddCharCount() {
-	this->char_count_++;
-}
-
-void Statistic::AddErrorCount() {
-	this->error_count_++;
+void Statistic::Count(int _key_code) {
+	if (_key_code < 26 && _key_code >= 0) {
+		this->char_count_++;
+	}
+	else if (_key_code == 59) {
+		this->char_count_--;
+	}
 }
 
 void Statistic::TimeUpdate() {
@@ -36,7 +37,8 @@ void Statistic::Draw(sf::RenderWindow* _window) {
 	sf::Text text;
 	text.setFont(this->settings_->GetDefaultFont());
 	text.setFillColor(Color::Black);
-	text.setPosition(1200 / 2, 600 / 2);
+	text.setPosition(1200 / 2 - 50, 600 / 2 - 50);
+	text.setString("WPM " + to_string(GetWPM()));
 	_window->draw(text);
 }
 
@@ -55,8 +57,7 @@ int Statistic::GetWPM() {
 	if ((int)this->time_ < 1) {
 		return 0;
 	}
-
-	return (int)(this->char_count_/(this->time_ * this->kCharNeed));
+	return (int)(this->char_count_/((this->time_ / 60) * this->kCharNeed));
 }
 
 double Statistic::GetTime() {

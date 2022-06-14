@@ -9,6 +9,7 @@ MainWindow::MainWindow() {
 	settings_btn_ = new Button(1000, 50, 150, 50, &this->settings_->GetDefaultFont(), "Settings", this->settings_->kDefaultTextSize, MainWindow::kColorsSettingsBtn);
 	statistic_ = new Statistic(settings_);
 	mouse_pos_ = Vector2f(-1, -1);
+	state_ = TestState::WAITING;
 }
 
 MainWindow::~MainWindow() {
@@ -20,15 +21,24 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::Reset() {
-	test_ongoing_ = true;
+	state_ = TestState::WAITING;
 	statistic_->Restart();
+	textbox_->Restart();
 }
 
 void MainWindow::Render() {
 	window_->clear(sf::Color::White);
 	keyboard_->Draw(window_);
 	textbox_->Draw(window_);
-	statistic_->DrawRemainingTime();
+	statistic_->DrawRemainingTime(window_);
+	settings_btn_->Render(window_);
+	window_->display();
+}
+
+void MainWindow::RenderResult() {
+	window_->clear(sf::Color::White);
+	statistic_->Draw(window_);
+	settings_btn_->Render(window_);
 	window_->display();
 }
 
@@ -36,7 +46,7 @@ void MainWindow::Show() {
 	window_ = new sf::RenderWindow(sf::VideoMode(1200, 600), "Keyboard Ninja", Style::Close);
 	while (window_->isOpen()) {
 		if (statistic_->GetRemainingTime() <= 0) {
-			test_ongoing_ = false;
+			state_ = TestState::RESULT;
 		}
 		sf::Event event;
 		while (window_->pollEvent(event)) {
@@ -50,30 +60,39 @@ void MainWindow::Show() {
 				if (event.key.code == sf::Keyboard::Enter) {
 					Reset();
 				}
-				if (test_ongoing_) {
+				if (state_ == TestState::WAITING && ((event.key.code < 26 && event.key.code > -1) || event.key.code == 57)) {
+					state_ = TestState::TESTING;
+					statistic_->Restart();
+				}
+				if (state_ == TestState::TESTING) {
 					keyboard_->ChangePressedKey(event.key.code);
 					textbox_->InteractionTextboxModel(event.key.code);
-					statistic_->AddCharCount();
+					statistic_->Count(event.key.code);
 				}
 			}
 			if (event.type == sf::Event::KeyReleased) {
-				if (test_ongoing_) {
+				if (state_ == TestState::TESTING) {
 					keyboard_->ChangeReleasedKey(event.key.code);
 				}
 			}
 			if (settings_btn_->Update(this->mouse_pos_)) {
 				SettingsWindow* settings_window = new SettingsWindow(*this->settings_);
 				settings_window->Show();
+				Reset();
 				delete settings_window;
 			}
 		}
-		if (test_ongoing_) {
+		switch (state_) {
+		case TestState::WAITING:
+			Render();
+			break;
+		case TestState::TESTING:
 			statistic_->TimeUpdate();
 			Render();
+			break;
+		case TestState::RESULT:
+			RenderResult();
+			break;
 		}
-		else {
-			statistic_->Draw(window_);
-		}
-		settings_btn_->Render(window_)
 	}
 }
