@@ -3,8 +3,6 @@
 #include "VirtualButton.h"
 #include "Settings.h"
 #include <iostream>
-#include <exception>
-#include <string>
 
 class VirtualKeyboard {
 private:

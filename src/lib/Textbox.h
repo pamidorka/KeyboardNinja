@@ -2,10 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "Settings.h"
 #include <iostream>
-#include <exception>
 #include <string>
 #include <list>
-#include <time.h>
 
 class TextboxModel {
 private:
@@ -20,14 +18,15 @@ private:
 	std::list <std::string> list_string_;
 	std::vector <TextChar> used_str_;
 
-	int mistakes_count_;
-	int press_count_;
 	int pointer_;
 	double used_window_;
 
 public:
 
+	static const sf::Color kStandartCharColor = sf::Color(190, 190, 190);
+
 	TextboxModel(Settings* _settings);
+	~TextboxModel();
 
 	void MovePointer(int _key_code);
 	void ChooseCharColor(const int _key);
