@@ -52,13 +52,12 @@ VirtualKeyboard::~VirtualKeyboard() {
 	delete[] buttons_;
 }
 
-void VirtualKeyboard::SetPosition(const double _x, const double _y) {
-	std::cout << _x << " " << _y << std::endl;
+void VirtualKeyboard::SetPosition(double _x, double _y) {
 	this->position_.x = _x;
 	this->position_.y = _y;
 }
 
-void VirtualKeyboard::ChangePressedKey(const int _key) {
+void VirtualKeyboard::ChangePressedKey(int _key) {
 	if (_key > 25 && _key != 57) {
 		return;
 	}
@@ -72,7 +71,7 @@ void VirtualKeyboard::ChangePressedKey(const int _key) {
 	buttons_[_key].SetCharacterColor(sf::Color::White);
 }
 
-void VirtualKeyboard::ChangeReleasedKey(const int _key) {
+void VirtualKeyboard::ChangeReleasedKey(int _key) {
 	if (_key > 25 && _key != 57) {
 		return;
 	}
