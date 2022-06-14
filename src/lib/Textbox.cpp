@@ -60,15 +60,17 @@ TextboxModel::TextboxModel(Settings* _settings) {
 
 void TextboxModel::MovePointer(int _key_code) {
 	if (_key_code == 57) NewWord();
-	if (_key_code < 26 && _key_code > -1) {
-		ChooseCharColor(_key_code);
-		pointer_++;
+	if (_key_code < 26 && _key_code >= 0) {
+		if ((size_t)pointer_ >= used_str_.size()) NewWord();
+		else {
+			ChooseCharColor(_key_code);
+			pointer_++;
+		}
 	}
 	if (_key_code == 59 && pointer_ > 0) {
 		pointer_--;
 		ChangeCharColor(sf::Color(190, 190, 190));
 	}
-	if ((size_t)pointer_ > used_str_.size()) NewWord();
 }
 
 void TextboxModel::NewWord() {
