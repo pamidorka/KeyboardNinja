@@ -18,10 +18,22 @@ Settings::Settings() {
 
 	font_ = default_font_;
 	text_size_ = kDefaultTextSize;
+
+	difficulty_settings_id_ = 0;
+	font_settings_id_ = 0;
+	font_size_settings_val_ = false;
+
+	test_length_in_seconds = 30;
 }
 
 Settings::Settings(vector<string> _vocabulary, Font _font, unsigned int _textSize) : vocabulary_(_vocabulary), font_(_font), text_size_(_textSize) {
 	LoadDefaultFont();
+
+	difficulty_settings_id_ = -1;
+	font_settings_id_ = -1;
+	font_size_settings_val_ = false;
+
+	test_length_in_seconds = 30;
 }
 
 bool Settings::LoadVocabularyFromCSV(string _file_name) {
@@ -77,4 +89,39 @@ const Font& Settings::GetDefaultFont() {
 
 unsigned int Settings::GetTextSize() {
 	return text_size_;
+}
+
+int Settings::GetTestLengthInSeconds() {
+	return test_length_in_seconds;
+}
+
+void Settings::SetTestLengthInSeconds(int _seconds) {
+	test_length_in_seconds = _seconds;
+}
+
+int Settings::GetDifficultySettingsId() {
+	return difficulty_settings_id_;
+}
+
+int Settings::GetFontSettingsId() {
+	return font_settings_id_;
+}
+
+bool Settings::GetFontSizeSettingsVal() {
+	return font_size_settings_val_;
+}
+
+void Settings::SetDifficultySettingsId(int _id)
+{
+	difficulty_settings_id_ = _id;
+}
+
+void Settings::SetFontSettingsId(int _id)
+{
+	font_settings_id_ = _id;
+}
+
+void Settings::SetFontSizeSettingsVal(bool _val)
+{
+	font_size_settings_val_ = _val;
 }
