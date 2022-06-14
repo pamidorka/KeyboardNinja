@@ -1,12 +1,13 @@
 #pragma once
-#include "lib/Settings.h"
-#include "lib/Buttons/MultipleButtons.h"
+#include "../Settings.h"
+#include "../Buttons/MultipleButtons.h"
 
 class SettingsWindow {
 private:
     static const ButtonColorSet kColorsDisabled;
     static const ButtonColorSet kColorsEnabled;
-    static const ButtonColorSet kColorsFontSizeBtn;
+    static const ButtonColorSet kColorsDefaultBtn;
+    static const int kDeltaTime = 15;
 
     RenderWindow window_;
     Vector2f mouse_pos_;
@@ -18,6 +19,12 @@ private:
     ToggleButton font_size_button;
     Text text_sample_;
 
+    Text test_length_label_;
+    Text test_length_value_;
+    Button test_length_increase_btn_;
+    Button test_length_decrease_btn_;
+
+    string ClockFormatString(int _seconds);
     void Render();
 public:
     SettingsWindow() = delete;
