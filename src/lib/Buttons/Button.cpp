@@ -19,7 +19,7 @@ void Button::RefreshButtonColor() {
 void Button::RefreshTextLocation() {
 	text_.setPosition(
 		shape_.getPosition().x + (shape_.getSize().x / 2.f) - (text_.getGlobalBounds().width / 2.f),
-		shape_.getPosition().y + (shape_.getSize().y / 2.f) - (text_.getGlobalBounds().height / 2.f)
+		shape_.getPosition().y + (shape_.getSize().y / 2.f) - (text_.getGlobalBounds().height / 1.4f)
 	);
 }
 
