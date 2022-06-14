@@ -26,9 +26,9 @@ public:
 	VirtualKeyboard(Settings* _settings);
 	~VirtualKeyboard();
 
-	void SetPosition(const double _x, const double _y);
-	void ChangePressedKey(const int _key);
-	void ChangeReleasedKey(const int _key);
+	void SetPosition(double _x, double _y);
+	void ChangePressedKey(int _key);
+	void ChangeReleasedKey(int _key);
 	Position GetPosition();
 	void Draw(sf::RenderWindow* _window);
 
