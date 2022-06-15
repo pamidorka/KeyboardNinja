@@ -26,16 +26,6 @@ Settings::Settings() {
 	test_length_in_seconds = 30;
 }
 
-Settings::Settings(vector<string> _vocabulary, Font _font, unsigned int _textSize) : vocabulary_(_vocabulary), font_(_font), text_size_(_textSize) {
-	LoadDefaultFont();
-
-	difficulty_settings_id_ = -1;
-	font_settings_id_ = -1;
-	font_size_settings_val_ = false;
-
-	test_length_in_seconds = 30;
-}
-
 bool Settings::LoadVocabularyFromCSV(string _file_name) {
 	ifstream file;
 	file.open("src/wordbase/" + _file_name, ifstream::in);

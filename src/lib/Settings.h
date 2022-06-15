@@ -29,7 +29,6 @@ public:
 	static const unsigned int kDefaultTextSize;
 
 	Settings();
-	Settings(vector<string> _vocabulary, Font _font, unsigned int _textSize = kDefaultTextSize);
 
 	bool LoadVocabularyFromCSV(string _file_name);
 	bool LoadFont(string _file_name);
