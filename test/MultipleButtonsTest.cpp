@@ -3,7 +3,7 @@
 
 ButtonColorSet kDefaultColorSet = ButtonColorSet(Color::Black, Color::Black, Color::Black);
 
-CTEST(stat_suite_, clock_test) {
+CTEST(multiple_buttons_tests, inactive_check) {
 	ToggleButton btn0(0, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
 	ToggleButton btn1(0, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
 	MultipleButtons mul_btn;
@@ -15,7 +15,7 @@ CTEST(stat_suite_, clock_test) {
 	}
 }
 
-CTEST(stat_suite_, clock_test) {
+CTEST(multiple_buttons_tests, set_active) {
 	ToggleButton btn0(0, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
 	ToggleButton btn1(0, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
 	MultipleButtons mul_btn;
@@ -31,7 +31,7 @@ CTEST(stat_suite_, clock_test) {
     }
 }
 
-CTEST(stat_suite_, clock_test) {
+CTEST(multiple_buttons_tests, button_click) {
 	ToggleButton btn0(0, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
     ToggleButton btn1(200, 0, 100, 100, nullptr, "", "", 1, kDefaultColorSet, kDefaultColorSet, false);
     MultipleButtons mul_btn;

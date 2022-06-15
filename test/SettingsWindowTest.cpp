@@ -1,7 +1,7 @@
 #include "src/lib/Windows/SettingsWindow.h"
 #include "thirdparty/ctest.h"
 
-CTEST(stat_suite_, clock_test) {
+CTEST(settings_window_tests, clock_format) {
     ASSERT_STR("00:00", SettingsWindow::ClockFormatString(0).c_str());
 	ASSERT_STR("00:05", SettingsWindow::ClockFormatString(5).c_str());
     ASSERT_STR("00:59", SettingsWindow::ClockFormatString(59).c_str());
