@@ -59,6 +59,22 @@ ButtonStates Button::GetButtonState() const {
 	return button_state_;
 }
 
+const string& Button::GetTextString() const {
+	return text_.getString();
+}
+
+const Font& Button::GetTextFont() const {
+	return *font_;
+}
+
+const RectangleShape& Button::GetBounds() const {
+	return shape_;
+}
+
+const ButtonColorSet& Button::GetButtonColorSet() const {
+	return colors_;
+}
+
 bool Button::Update(Vector2f _mouse_pos) {
 	bool result = false;
 

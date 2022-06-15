@@ -46,6 +46,11 @@ public:
 	void SetText(const string& _s);
 
 	ButtonStates GetButtonState() const;
+	const string& GetTextString() const;
+	const Font& GetTextFont() const;
+	const RectangleShape& GetBounds() const;
+	const ButtonColorSet& GetButtonColorSet() const;
+
 	bool Update(Vector2f _mouse_pos);
 	void Render(RenderTarget* _target);
 };
