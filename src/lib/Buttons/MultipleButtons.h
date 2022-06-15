@@ -13,9 +13,10 @@ public:
 	MultipleButtons();
 	
 	void AddButton(ToggleButton& _button);
-	void SetActiveButtonId(size_t _id);
+
+	void SetActiveButtonId(int _id);
 	int GetActiveButtonId();
 
-	bool Update(const Vector2f _mouse_pos, bool _mouse_pressed);
+	bool Update(Vector2f _mouse_pos, bool _mouse_pressed);
 	void Render(RenderTarget* _target);
 };
