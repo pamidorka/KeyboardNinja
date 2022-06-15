@@ -8,6 +8,14 @@ void MultipleButtons::AddButton(ToggleButton& _button) {
 	buttons_.push_back(_button);
 }
 
+const ToggleButton& MultipleButtons::GetButton(size_t _id) const {
+	if (_id >= buttons_.size()) {
+		throw out_of_range("Index is out of range");
+	}
+
+	return buttons_[_id];
+}
+
 void MultipleButtons::SetActiveButtonId(int _id) {
 	active_button_id_ = _id;
 

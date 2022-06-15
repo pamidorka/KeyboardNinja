@@ -13,6 +13,7 @@ public:
 	MultipleButtons();
 	
 	void AddButton(ToggleButton& _button);
+	const ToggleButton& GetButton(size_t _id) const;
 
 	void SetActiveButtonId(int _id);
 	int GetActiveButtonId();
