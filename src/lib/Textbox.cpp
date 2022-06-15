@@ -121,10 +121,10 @@ void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
 
 bool TextboxModel::CheckCharCorrect(int _key_code, bool _shift_pressed) {
 	if (_key_code == 57) {
-		return pointer_ == used_str_.size();
+		return (size_t)pointer_ == used_str_.size();
 	}
 	if (_key_code > -1 && _key_code < 26) {
-		if (pointer_ == used_str_.size()) {
+		if ((size_t)pointer_ == used_str_.size()) {
 			return false;
 		}
 

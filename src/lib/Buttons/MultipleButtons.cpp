@@ -20,7 +20,7 @@ void MultipleButtons::SetActiveButtonId(int _id) {
 	active_button_id_ = _id;
 
 	for (size_t i = 0; i < buttons_.size(); i++) {
-		buttons_[i].Toggle(i == _id);
+		buttons_[i].Toggle(i == (size_t)_id);
 	}
 }
 
