@@ -6,28 +6,12 @@ SFML-2.5.1
 
 # objects files
 
-VirtualButton.d
-VirtualButton.o
-Keyboard.d
-Keyboard.o
-main.d
-main.o
-Settings.d
-Settings.o
-Textbox.d
-Textbox.o
-MainWindow.d
-MainWindow.o
-MultipleButtons.d
-MultipleButtons.o
-SettingsWindow.d
-SettingsWindow.o
-ToggleButton.d
-ToggleButton.o
-Button.d
-Button.o
-Statistic.o
-Statistic.d
+*.o
+*.d
+
+# executable files
+
 master
+utest
 
 

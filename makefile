@@ -47,3 +47,26 @@ obj/lib/Statistic.o: $(STATISTIC) $(SFML)
 	$(CPP) -c $(FF) $(CF) $(CPPF) -o $@ $(STATISTIC)
 
 -include Keyboard.d Button.d Settings.d main.d MainWindow.d SettingsWindow.d Button.d MultipleButtons.d ToggleButton.d Statistic.d
+
+FF_TEST = -I ./
+
+MAIN_TEST = test/TestMain.cpp
+TEXTBOX_TEST = test/TextboxTest.cpp
+STATISTIC_TEST = test/StatisticTest.cpp
+KEYBOARD_TEST = test/KeyboardTest.cpp
+
+COMPILE_TEST = obj/test/main/TestMain.o obj/test/lib/TextboxTest.o obj/test/lib/StatisticTest.o  obj/lib/Statistic.o obj/lib/Textbox.o obj/lib/VirtualButton.o obj/lib/Keyboard.o obj/lib/MainWindow.o obj/lib/SettingsWindow.o obj/lib/Button.o obj/lib/ToggleButton.o obj/lib/MultipleButtons.o obj/lib/Settings.o obj/test/lib/KeyboardTest.o
+
+bin/utest: $(COMPILE_TEST) $(SFML)
+	$(CPP) $(COMPILE_TEST) $(SFML) -o $@ 
+obj/test/main/TestMain.o: $(MAIN_TEST) $(SFML)
+	$(CPP) -c $(FF_TEST) $(CF) $(CPPF) -o $@ $(MAIN_TEST)
+obj/test/lib/TextboxTest.o: $(TEXTBOX_TEST) $(SFML)
+	$(CPP) -c $(FF_TEST) $(CF) $(CPPF) -o $@ $(TEXTBOX_TEST)
+obj/test/lib/StatisticTest.o: $(STATISTIC_TEST) $(SFML)
+	$(CPP) -c $(FF_TEST) $(CF) $(CPPF) -o $@ $(STATISTIC_TEST)
+obj/test/lib/KeyboardTest.o: $(KEYBOARD_TEST) $(SFML)
+	$(CPP) -c $(FF_TEST) $(CF) $(CPPF) -o $@ $(KEYBOARD_TEST)
+
+
+-include TestMain.d TextboxTest.d StatisticTest.d KeyboardTest.d

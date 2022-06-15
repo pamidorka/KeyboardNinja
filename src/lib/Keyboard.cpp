@@ -5,7 +5,6 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 	this->settings_ = _settings;
 
 	for (int i = 0; i < kNumberOfButtons_ - 2; i++) {
-		buttons_[i].SetKeyCode(i);
 		buttons_[i].SetCharacter(std::string((size_t)1, (char)('A' + i)));
 		buttons_[i].SetColor(sf::Color::White);
 	}
@@ -40,11 +39,9 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 		buttons_[26].SetPosition(60 + kSizeOfOutline_, 3 * (60 + kSizeOfOutline_));
 		buttons_[27].SetPosition(7 * (60 + kSizeOfOutline_), 2 * (60 + kSizeOfOutline_));
 
-		buttons_[26].SetKeyCode(57);
 		buttons_[26].SetColor(sf::Color::White);
 		buttons_[26].SetCharacter("");
 		buttons_[26].SetSize(4 * (60 + kSizeOfOutline_) - 1, 60);
-		buttons_[27].SetKeyCode(sf::Keyboard::RShift);
 		buttons_[27].SetCharacter("Shift");
 		buttons_[27].SetSize(2 * (60 + kSizeOfOutline_) - 1, 60);
 		buttons_[27].SetColor(sf::Color::White);
@@ -129,8 +126,11 @@ void VirtualKeyboard::Draw(sf::RenderWindow* _window) {
 
 		_window->draw(btn);
 		_window->draw(text);
-		SetPosition(300, 300);
 	}
+}
+
+VirtualButton* VirtualKeyboard::GetButtons() {
+	return this->buttons_;
 }
 
 

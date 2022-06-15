@@ -24,8 +24,6 @@ void Statistic::Count(int _key_code, bool _correct) {
 		}
 		this->char_count_--;
 	}
-
-	std::cout << this->error_count_ << " " << this->char_count_ << std::endl;
 }
 
 void Statistic::TimeUpdate() {
@@ -91,7 +89,7 @@ void Statistic::Draw(sf::RenderWindow* _window) {
 
 	text.setPosition(1200 / 2 - 50, 600 / 2 + 100);
 	if (this->char_count_ > 0) {
-		text.setString("Accuracy " + std::to_string((int)((1 - this->error_count_ / (double)this->char_count_) * 100)) + "%");
+		text.setString("Accuracy " + std::to_string(GetAccuracy()) + "%");
 	}
 	else {
 		text.setString("Accuracy 0%");
@@ -104,13 +102,6 @@ double Statistic::GetRemainingTime() {
 	return this->settings_->GetTestLengthInSeconds() - this->time_;
 }
 
-bool Statistic::GetTimeState() {
-	if (this->time_ > 0) {
-		return true;
-	}
-	return false;
-}
-
 int Statistic::GetWPM() {
 	if ((int)this->time_ < 1) {
 		return 0;
@@ -118,7 +109,19 @@ int Statistic::GetWPM() {
 	return (int)((this->char_count_ - this->error_count_) / ((this->time_ / 60) * this->kCharNeed));
 }
 
+int Statistic::GetAccuracy() {
+	return (int)((1 - this->error_count_ / (double)this->char_count_) * 100);
+}
+
 double Statistic::GetTime() {
 	return this->time_;
+}
+
+int Statistic::GetCharCount() {
+	return this->char_count_;
+}
+
+int Statistic::GetErrorCount() {
+	return this->error_count_;
 }
 

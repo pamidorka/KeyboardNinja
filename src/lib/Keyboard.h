@@ -31,4 +31,6 @@ public:
 	Position GetPosition();
 	void Draw(sf::RenderWindow* _window);
 
+	VirtualButton* GetButtons();
+
 };
