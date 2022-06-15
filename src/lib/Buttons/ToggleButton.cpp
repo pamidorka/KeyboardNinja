@@ -21,7 +21,7 @@ void ToggleButton::Toggle(bool _is_enabled) {
 	UpdateTextAndColors();
 }
 
-bool ToggleButton::IsEnabled() {
+bool ToggleButton::IsEnabled() const {
 	return is_enabled_;
 }
 

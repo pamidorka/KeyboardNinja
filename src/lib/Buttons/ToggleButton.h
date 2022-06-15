@@ -16,7 +16,7 @@ public:
 
 	void Toggle(bool _is_enabled);
 
-	bool IsEnabled();
+	bool IsEnabled() const;
 	const string& GetTextEnabledString() const;
 	const string& GetTextDisabledString() const;
 	const ButtonColorSet& GetButtonColorEnabledSet() const;

@@ -16,7 +16,7 @@ public:
 	const ToggleButton& GetButton(size_t _id) const;
 
 	void SetActiveButtonId(int _id);
-	int GetActiveButtonId();
+	int GetActiveButtonId() const;
 
 	bool Update(Vector2f _mouse_pos, bool _mouse_pressed);
 	void Render(RenderTarget* _target);

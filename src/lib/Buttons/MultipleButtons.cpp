@@ -24,7 +24,7 @@ void MultipleButtons::SetActiveButtonId(int _id) {
 	}
 }
 
-int MultipleButtons::GetActiveButtonId() {
+int MultipleButtons::GetActiveButtonId() const {
 	return active_button_id_;
 }
 
