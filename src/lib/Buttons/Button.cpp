@@ -43,7 +43,7 @@ Button::~Button() {
 
 }
 
-bool Button::IsMouseHover(const Vector2f _mouse_pos) const {
+bool Button::IsMouseHover(Vector2f _mouse_pos) const {
 	return shape_.getGlobalBounds().contains(_mouse_pos);
 }
 
@@ -55,11 +55,11 @@ void Button::SetText(const string& _s) {
 	text_.setString(_s);
 }
 
-ButtonStates Button::GetButtonState() {
+ButtonStates Button::GetButtonState() const {
 	return button_state_;
 }
 
-bool Button::Update(const Vector2f _mouse_pos) {
+bool Button::Update(Vector2f _mouse_pos) {
 	bool result = false;
 
 	switch (button_state_) {

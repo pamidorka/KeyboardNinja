@@ -40,12 +40,12 @@ public:
 	Button(float _x, float _y, float _width, float _height, const Font* _font, string _text, unsigned int _text_size, const ButtonColorSet &_colors);
 	~Button();
 
-	bool IsMouseHover(const Vector2f _mouse_pos) const;
+	bool IsMouseHover(Vector2f _mouse_pos) const;
 
 	void SetColorSet(const ButtonColorSet& _color_set);
 	void SetText(const string& _s);
 
-	ButtonStates GetButtonState();
-	bool Update(const Vector2f _mouse_pos);
+	ButtonStates GetButtonState() const;
+	bool Update(Vector2f _mouse_pos);
 	void Render(RenderTarget* _target);
 };
