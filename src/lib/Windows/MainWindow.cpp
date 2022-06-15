@@ -3,12 +3,14 @@
 const ButtonColorSet MainWindow::kColorsSettingsBtn = ButtonColorSet(Color(0x666666FF), Color(0x888888FF), Color(0xAAAAAAFF));
 
 MainWindow::MainWindow() {
+	mouse_pos_ = Vector2f(-1, -1);
+	mouse_pressed_ = false;
+
 	settings_ = new Settings;
 	keyboard_ = new VirtualKeyboard(settings_);
 	textbox_ = new TextboxView(settings_);
 	settings_btn_ = new Button(1000, 50, 150, 50, &this->settings_->GetDefaultFont(), "Settings", this->settings_->kDefaultTextSize, MainWindow::kColorsSettingsBtn);
 	statistic_ = new Statistic(settings_);
-	mouse_pos_ = Vector2f(-1, -1);
 	state_ = TestState::WAITING;
 }
 
@@ -54,9 +56,16 @@ void MainWindow::Show() {
 			if (event.type == sf::Event::Closed) {
 				window_->close();
 			}
-			if (event.type == Event::MouseMoved) {
+			else if (event.type == Event::MouseMoved) {
 				mouse_pos_ = Vector2f(event.mouseMove.x, event.mouseMove.y);
 			}
+			else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+				mouse_pressed_ = true;
+			}
+			else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left) {
+				mouse_pressed_ = false;
+			}
+
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Enter) {
 					Reset();
@@ -82,7 +91,8 @@ void MainWindow::Show() {
 					keyboard_->ChangeReleasedKey(event.key.code);
 				}
 			}
-			if (settings_btn_->Update(this->mouse_pos_)) {
+
+			if (settings_btn_->Update(this->mouse_pos_, mouse_pressed_)) {
 				SettingsWindow* settings_window = new SettingsWindow(*this->settings_);
 				settings_window->Show();
 				Reset();

@@ -51,6 +51,6 @@ public:
 	const RectangleShape& GetBounds() const;
 	const ButtonColorSet& GetButtonColorSet() const;
 
-	bool Update(Vector2f _mouse_pos);
+	bool Update(Vector2f _mouse_pos, bool _mouse_pressed);
 	void Render(RenderTarget* _target);
 };

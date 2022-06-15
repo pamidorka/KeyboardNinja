@@ -11,9 +11,10 @@ private:
 
     RenderWindow window_;
     Vector2f mouse_pos_;
+    bool mouse_pressed_;
 
     Settings* settings_;
-    
+
     MultipleButtons text_font_buttons_;
     MultipleButtons difficulty_buttons_;
     ToggleButton font_size_button;
@@ -24,11 +25,12 @@ private:
     Button test_length_increase_btn_;
     Button test_length_decrease_btn_;
 
-    string ClockFormatString(int _seconds);
     void Render();
 public:
     SettingsWindow() = delete;
     SettingsWindow(Settings& _settings);
+
+    string ClockFormatString(int _seconds);
 
     void Show();
 };

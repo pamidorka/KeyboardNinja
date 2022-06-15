@@ -16,6 +16,6 @@ public:
 	void SetActiveButtonId(size_t _id);
 	int GetActiveButtonId();
 
-	bool Update(const Vector2f _mouse_pos);
+	bool Update(const Vector2f _mouse_pos, bool _mouse_pressed);
 	void Render(RenderTarget* _target);
 };

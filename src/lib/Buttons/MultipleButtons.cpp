@@ -20,10 +20,10 @@ int MultipleButtons::GetActiveButtonId() {
 	return active_button_id_;
 }
 
-bool MultipleButtons::Update(const Vector2f _mouse_pos) {
+bool MultipleButtons::Update(const Vector2f _mouse_pos, bool _mouse_pressed) {
 	bool result = false;
 	for (size_t i = 0; i < buttons_.size(); i++) {
-		if (buttons_[i].Update(_mouse_pos)) {
+		if (buttons_[i].Update(_mouse_pos, _mouse_pressed)) {
 			active_button_id_ = i;
 			result = true;
 		}

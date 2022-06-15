@@ -25,8 +25,8 @@ bool ToggleButton::IsEnabled() {
 	return is_enabled_;
 }
 
-bool ToggleButton::Update(const Vector2f _mouse_pos) {
-	if (Button::Update(_mouse_pos)) {
+bool ToggleButton::Update(const Vector2f _mouse_pos, bool _mouse_pressed) {
+	if (Button::Update(_mouse_pos, _mouse_pressed)) {
 		Toggle(!is_enabled_);
 		return true;
 	}

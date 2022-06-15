@@ -75,18 +75,18 @@ const ButtonColorSet& Button::GetButtonColorSet() const {
 	return colors_;
 }
 
-bool Button::Update(Vector2f _mouse_pos) {
+bool Button::Update(Vector2f _mouse_pos, bool _mouse_pressed) {
 	bool result = false;
 
 	switch (button_state_) {
 	case ButtonStates::ButtonIdle:
 		if (IsMouseHover(_mouse_pos)) {
-			button_state_ = Mouse::isButtonPressed(Mouse::Left) ? ButtonStates::ButtonHoverInactive : ButtonStates::ButtonHover;
+			button_state_ = _mouse_pressed ? ButtonStates::ButtonHoverInactive : ButtonStates::ButtonHover;
 		}
 		break;
 	case ButtonStates::ButtonHover:
 		if (IsMouseHover(_mouse_pos)) {
-			button_state_ = Mouse::isButtonPressed(Mouse::Left) ? ButtonStates::ButtonHoverActive : ButtonStates::ButtonHover;
+			button_state_ = _mouse_pressed ? ButtonStates::ButtonHoverActive : ButtonStates::ButtonHover;
 		}
 		else {
 			button_state_ = ButtonStates::ButtonIdle;
@@ -94,7 +94,7 @@ bool Button::Update(Vector2f _mouse_pos) {
 		break;
 	case ButtonStates::ButtonHoverInactive:
 		if (IsMouseHover(_mouse_pos)) {
-			button_state_ = Mouse::isButtonPressed(Mouse::Left) ? ButtonStates::ButtonHoverInactive : ButtonStates::ButtonHover;
+			button_state_ = _mouse_pressed ? ButtonStates::ButtonHoverInactive : ButtonStates::ButtonHover;
 		}
 		else {
 			button_state_ = ButtonStates::ButtonIdle;
@@ -103,7 +103,7 @@ bool Button::Update(Vector2f _mouse_pos) {
 	case ButtonStates::ButtonHoverActive:
 	case ButtonStates::ButtonUnhoverActive:
 		if (IsMouseHover(_mouse_pos)) {
-			if (Mouse::isButtonPressed(Mouse::Left)) {
+			if (_mouse_pressed) {
 				button_state_ = ButtonStates::ButtonHoverActive;
 			}
 			else {
@@ -112,7 +112,7 @@ bool Button::Update(Vector2f _mouse_pos) {
 			}
 		}
 		else {
-			button_state_ = Mouse::isButtonPressed(Mouse::Left) ? ButtonStates::ButtonUnhoverActive : ButtonStates::ButtonIdle;
+			button_state_ = _mouse_pressed ? ButtonStates::ButtonUnhoverActive : ButtonStates::ButtonIdle;
 		}
 		break;
 	}

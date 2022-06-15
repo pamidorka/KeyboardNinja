@@ -18,5 +18,5 @@ public:
 	void Toggle(bool _is_enabled);
 	bool IsEnabled();
 
-	bool Update(const Vector2f _mouse_pos);
+	bool Update(const Vector2f _mouse_pos, bool _mouse_pressed);
 };
