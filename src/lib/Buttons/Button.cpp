@@ -23,7 +23,7 @@ void Button::RefreshTextLocation() {
 	);
 }
 
-Button::Button(float _x, float _y, float _width, float _height, const Font* _font, string _text, unsigned int _text_size, const ButtonColorSet& _colors)
+Button::Button(float _x, float _y, float _width, float _height, const Font* _font, const string &_text, unsigned int _text_size, const ButtonColorSet& _colors)
 	: colors_(_colors) {
 	button_state_ = ButtonStates::ButtonIdle;
 

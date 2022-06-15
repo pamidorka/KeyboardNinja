@@ -12,7 +12,7 @@ private:
 	void UpdateTextAndColors();
 
 public:
-	ToggleButton(float _x, float _y, float _width, float _height, const Font* _font, string _text_enabled, string _text_disabled, unsigned int _text_size, const ButtonColorSet& _color_enabled, const ButtonColorSet& _color_disabled, bool _is_enabled = false);
+	ToggleButton(float _x, float _y, float _width, float _height, const Font* _font, const string& _text_enabled, const string& _text_disabled, unsigned int _text_size, const ButtonColorSet& _color_enabled, const ButtonColorSet& _color_disabled, bool _is_enabled = false);
 	~ToggleButton();
 
 	void Toggle(bool _is_enabled);
