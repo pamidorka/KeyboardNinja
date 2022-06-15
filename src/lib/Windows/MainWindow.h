@@ -8,13 +8,16 @@
 class MainWindow {
 private:
 
-	enum TestState {
+	enum class TestState {
 		WAITING,
 		TESTING,
 		RESULT
 	};
 
 	sf::RenderWindow* window_;
+	Vector2f mouse_pos_;
+	bool mouse_pressed_;
+
 	Settings* settings_;
 	VirtualKeyboard* keyboard_;
 	TextboxView* textbox_;
@@ -23,7 +26,7 @@ private:
 
 	bool shift_pressed_ = false;
 	TestState state_;
-	Vector2f mouse_pos_;
+	
 
 	static const ButtonColorSet kColorsSettingsBtn;
 
