@@ -21,8 +21,21 @@ void ToggleButton::Toggle(bool _is_enabled) {
 	UpdateTextAndColors();
 }
 
-bool ToggleButton::IsEnabled() {
+bool ToggleButton::IsEnabled() const {
 	return is_enabled_;
+}
+
+const string& ToggleButton::GetTextEnabledString() const {
+	return text_enabled_;
+}
+const string& ToggleButton::GetTextDisabledString() const {
+	return text_disabled_;
+}
+const ButtonColorSet& ToggleButton::GetButtonColorEnabledSet() const {
+	return color_enabled_;
+}
+const ButtonColorSet& ToggleButton::GetButtonColorDisabledSet() const {
+	return color_disabled_;
 }
 
 bool ToggleButton::Update(const Vector2f _mouse_pos, bool _mouse_pressed) {

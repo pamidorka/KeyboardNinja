@@ -59,7 +59,7 @@ ButtonStates Button::GetButtonState() const {
 	return button_state_;
 }
 
-const string& Button::GetTextString() const {
+const String& Button::GetTextString() const {
 	return text_.getString();
 }
 
