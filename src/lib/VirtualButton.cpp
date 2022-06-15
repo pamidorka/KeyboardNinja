@@ -20,7 +20,7 @@ void VirtualButton::SetPosition(const double _width, const double _height) {
 	this->position_.y = _height;
 }
 
-void VirtualButton::SetCharacter(const char _symbol) {
+void VirtualButton::SetCharacter(const std::string _symbol) {
 	this->character_ = _symbol;
 }
 
@@ -36,7 +36,7 @@ int VirtualButton::GetKeyCode() {
 	return this->keycode_;
 }
 
-char VirtualButton::GetCharacter() {
+std::string VirtualButton::GetCharacter() {
 	return this->character_;
 }
 

@@ -23,16 +23,17 @@ private:
 
 public:
 
-	static const sf::Color kStandartCharColor = sf::Color(190, 190, 190);
+	static const sf::Color kStandartCharColor;
 
 	TextboxModel(Settings* _settings);
-	~TextboxModel();
 
-	void MovePointer(int _key_code);
-	void ChooseCharColor(const int _key);
+	void MovePointer(int _key_code, bool _shift_pressed);
+	void ChooseCharColor(const int _key, bool _shift_pressed);
+	bool CheckCharCorrect(int _key_code, bool _shift_pressed);
 	void ChangeCharColor(const sf::Color _color);
 	void LoadList();
 	void NewWord();
+	void Restart();
 
 	const std::vector <TextChar>& GetUsedStr();
 	const std::list <std::string>& GetList();
@@ -60,7 +61,9 @@ public:
 	TextboxView(Settings* _settings);
 	~TextboxView();
 
-	void InteractionTextboxModel(int _key_code);
+	void InteractionTextboxModel(int _key_code, bool _shift_pressed);
+	void Restart();
+	bool CheckCharCorrect(int _key_code, bool _shift_pressed);
 	void Draw(sf::RenderWindow* _window);
 	void SetSize(const double _width, const double _height);
 	void SetPosition(const double _width, const double _height);

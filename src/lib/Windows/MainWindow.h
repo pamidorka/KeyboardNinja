@@ -5,9 +5,14 @@
 #include "lib/Windows/SettingsWindow.h"
 #include "lib/Statistic.h"
 
-
 class MainWindow {
 private:
+
+	enum TestState {
+		WAITING,
+		TESTING,
+		RESULT
+	};
 
 	sf::RenderWindow* window_;
 	Settings* settings_;
@@ -16,12 +21,14 @@ private:
 	Button* settings_btn_;
 	Statistic* statistic_;
 
-	bool test_ongoing_ = true;
+	bool shift_pressed_ = false;
+	TestState state_;
 	Vector2f mouse_pos_;
 
 	static const ButtonColorSet kColorsSettingsBtn;
 
 	void Render();
+	void RenderResult();
 	void Reset();
 
 public:

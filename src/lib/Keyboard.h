@@ -15,7 +15,7 @@ private:
 	VirtualButton* buttons_;
 	Settings* settings_;
 	Position position_;
-	const int kNumberOfButtons_ = 27;
+	const int kNumberOfButtons_ = 28;
 	const size_t kSizeOfCharacter_ = 30;
 	const size_t kSizeOfOutline_ = 1;
 
@@ -27,6 +27,7 @@ public:
 	void SetPosition(double _x, double _y);
 	void ChangePressedKey(int _key);
 	void ChangeReleasedKey(int _key);
+	void Reset();
 	Position GetPosition();
 	void Draw(sf::RenderWindow* _window);
 

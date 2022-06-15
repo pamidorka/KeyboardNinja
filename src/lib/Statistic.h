@@ -14,13 +14,14 @@ private:
 	int char_count_;
 	int error_count_;
 
+	string ClockFormatString(double _seconds_total);
+
 public:
 
 	Statistic(Settings* _settings);
 
 	void Restart();
-	void AddCharCount();
-	void AddErrorCount();
+	void Count(int _key_code, bool _correct);
 	void TimeUpdate();
 	void DrawRemainingTime(sf::RenderWindow* _window);
 	void Draw(sf::RenderWindow* _window);

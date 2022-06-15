@@ -1,5 +1,7 @@
 #include "Textbox.h"
 
+const sf::Color TextboxModel::kStandartCharColor = sf::Color(190, 190, 190);
+
 //texboxview functions
 
 TextboxView::TextboxView(Settings* _settings) {
@@ -13,13 +15,17 @@ TextboxView::~TextboxView() {
 	delete model_;
 }
 
-void TextboxView::InteractionTextboxModel(int _key_code) {
-	this->model_->MovePointer(_key_code);
+void TextboxView::InteractionTextboxModel(int _key_code, bool _shift_pressed) {
+	this->model_->MovePointer(_key_code, _shift_pressed);
 }
 
 void TextboxView::SetPosition(double _x, double _y) {
 	this->position_.x = _x;
 	this->position_.y = _y;
+}
+
+bool TextboxView::CheckCharCorrect(int _key_code, bool _shift_pressed) {
+	return this->model_->CheckCharCorrect(_key_code, _shift_pressed);
 }
 
 void TextboxView::SetSize(double _width, double _height) {
@@ -49,36 +55,25 @@ void TextboxView::Draw(sf::RenderWindow* _window) {
 	}
 }
 
-void TextboxView::DrawStatictic(sf::RenderWindow* _window) {
-	sf::Text text;
-	text.setFont(this->settings_->GetDefaultFont());
-	text.setFillColor(Color::Black);
-	text.setString("WPM " + this->model_->GetStatistic().GetWPM());
-	text.setPosition(1200 / 2, 600 / 2);
-
-	_window->draw(text);
+void TextboxView::Restart() {
+	this->model_->Restart();
 }
 
 //texboxmodel functions
 
 TextboxModel::TextboxModel(Settings* _settings) {
 	this->settings_ = _settings;
-	this->statistic_ = new Statistic(_settings);
 
 	LoadList();
 	NewWord();
 }
 
-TextboxModel::~TextboxModel() {
-	delete statistic_;
-}
-
-void TextboxModel::MovePointer(int _key_code) {
+void TextboxModel::MovePointer(int _key_code, bool _shift_pressed) {
 	if (_key_code == 57) NewWord();
 	if (_key_code < 26 && _key_code >= 0) {
 		if ((size_t)pointer_ >= used_str_.size()) NewWord();
 		else {
-			ChooseCharColor(_key_code);
+			ChooseCharColor(_key_code, _shift_pressed);
 			pointer_++;
 		}
 	}
@@ -97,6 +92,12 @@ void TextboxModel::NewWord() {
 	pointer_ = 0;
 }
 
+void TextboxModel::Restart() {
+	this->list_string_.clear();
+	LoadList();
+	NewWord();
+}
+
 void TextboxModel::LoadList() {
 	std::string word = settings_->GetWordAt(rand() % settings_->GetVocabularySize());
 	while (list_string_.size() < 5) {
@@ -109,13 +110,18 @@ void TextboxModel::ChangeCharColor(const sf::Color _color) {
 	used_str_[pointer_].color = _color;
 }
 
-void TextboxModel::ChooseCharColor(const int _key) {
-	if ((int)('a' + _key) == (int)used_str_[pointer_].character) { 
+void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
+	if (CheckCharCorrect(_key, _shift_pressed)) {
 		ChangeCharColor(sf::Color::Black); 
 	}
 	else {
 		ChangeCharColor(sf::Color::Red);
 	}
+}
+
+bool TextboxModel::CheckCharCorrect(int _key_code, bool _shift_pressed) {
+	char temp = _shift_pressed ? 'A' : 'a';
+	return (int)(temp + _key_code) == (int)used_str_[pointer_].character;
 }
 
 const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
@@ -124,8 +130,4 @@ const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
 
 const std::list <std::string>& TextboxModel::GetList() {
 	return this->list_string_;
-}
-
-const Statistic& TextboxModel::GetStatistic() {
-	return this->statistic_;
 }
