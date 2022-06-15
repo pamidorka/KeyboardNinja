@@ -21,7 +21,7 @@ public:
 	Statistic(Settings* _settings);
 
 	void Restart();
-	void Count(int _key_code);
+	void Count(int _key_code, bool _correct);
 	void TimeUpdate();
 	void DrawRemainingTime(sf::RenderWindow* _window);
 	void Draw(sf::RenderWindow* _window);

@@ -63,7 +63,6 @@ void VirtualKeyboard::SetPosition(double _x, double _y) {
 }
 
 void VirtualKeyboard::ChangePressedKey(int _key) {
-	std::cout << _key << std::endl;
 	if ((_key < 0 || _key > 25) && _key != 57 && _key != 42 && _key != 38) {
 		return;
 	}

@@ -24,6 +24,10 @@ void TextboxView::SetPosition(double _x, double _y) {
 	this->position_.y = _y;
 }
 
+bool TextboxView::CheckCharCorrect(int _key_code, bool _shift_pressed) {
+	return this->model_->CheckCharCorrect(_key_code, _shift_pressed);
+}
+
 void TextboxView::SetSize(double _width, double _height) {
 	this->size_.x = _width;
 	this->size_.y = _height;

@@ -11,13 +11,21 @@ void Statistic::Restart() {
 	this->error_count_ = 0;
 }
 
-void Statistic::Count(int _key_code) {
+void Statistic::Count(int _key_code, bool _correct) {
 	if (_key_code < 26 && _key_code >= 0) {
+		if (!_correct) {
+			this->error_count_++;
+		}
 		this->char_count_++;
 	}
 	else if (_key_code == 59) {
+		if (!_correct) {
+			this->error_count_--;
+		}
 		this->char_count_--;
 	}
+
+	std::cout << this->error_count_ << " " << this->char_count_ << std::endl;
 }
 
 void Statistic::TimeUpdate() {
@@ -55,6 +63,40 @@ void Statistic::Draw(sf::RenderWindow* _window) {
 	text.setFillColor(Color::Black);
 	text.setPosition(1200 / 2 - 50, 600 / 2 - 50);
 	text.setString("WPM " + to_string(GetWPM()));
+
+	_window->draw(text);
+
+	text.setPosition(1200 / 2 - 50, 600 / 2);
+	switch (this->settings_->GetDifficultySettingsId()) {
+	case 0:
+		text.setString("Difficulty easy");
+		break;
+	case 1:
+		text.setString("Difficulty normal");
+		break;
+	case 2:
+		text.setString("Difficulty hard");
+		break;
+	default:
+		text.setString("Unknow difficulty");
+		break;
+	}
+
+	_window->draw(text);
+
+	text.setPosition(1200 / 2 - 50, 600 / 2 + 50);
+	text.setString("Total length " + ClockFormatString(this->settings_->GetTestLengthInSeconds()));
+
+	_window->draw(text);
+
+	text.setPosition(1200 / 2 - 50, 600 / 2 + 100);
+	if (this->char_count_ > 0) {
+		text.setString("Accuracy " + std::to_string((int)((1 - this->error_count_ / (double)this->char_count_) * 100)) + "%");
+	}
+	else {
+		text.setString("Accuracy 0%");
+	}
+
 	_window->draw(text);
 }
 
@@ -73,7 +115,7 @@ int Statistic::GetWPM() {
 	if ((int)this->time_ < 1) {
 		return 0;
 	}
-	return (int)(this->char_count_/((this->time_ / 60) * this->kCharNeed));
+	return (int)((this->char_count_ - this->error_count_) / ((this->time_ / 60) * this->kCharNeed));
 }
 
 double Statistic::GetTime() {

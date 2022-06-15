@@ -70,8 +70,8 @@ void MainWindow::Show() {
 				}
 				if (state_ == TestState::TESTING) {
 					keyboard_->ChangePressedKey(event.key.code);
+					statistic_->Count(event.key.code, textbox_->CheckCharCorrect(event.key.code, shift_pressed_));
 					textbox_->InteractionTextboxModel(event.key.code, shift_pressed_);
-					statistic_->Count(event.key.code);
 				}
 			}
 			if (event.type == sf::Event::KeyReleased) {
