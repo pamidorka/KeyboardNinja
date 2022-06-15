@@ -12,17 +12,15 @@ void Statistic::Restart() {
 }
 
 void Statistic::Count(int _key_code, bool _correct) {
-	if (_key_code < 26 && _key_code >= 0) {
+	this->char_count_++;
+
+	if ((_key_code < 26 && _key_code > -1) || _key_code == 57) {
 		if (!_correct) {
 			this->error_count_++;
 		}
-		this->char_count_++;
 	}
 	else if (_key_code == 59) {
-		if (!_correct) {
-			this->error_count_--;
-		}
-		this->char_count_--;
+		this->error_count_++;
 	}
 }
 

@@ -70,7 +70,7 @@ TextboxModel::TextboxModel(Settings* _settings) {
 
 void TextboxModel::MovePointer(int _key_code, bool _shift_pressed) {
 	if (_key_code == 57) NewWord();
-	if (_key_code < 26 && _key_code >= 0) {
+	if (_key_code < 26 && _key_code > -1) {
 		if ((size_t)pointer_ >= used_str_.size()) NewWord();
 		else {
 			ChooseCharColor(_key_code, _shift_pressed);
@@ -112,7 +112,7 @@ void TextboxModel::ChangeCharColor(const sf::Color _color) {
 
 void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
 	if (CheckCharCorrect(_key, _shift_pressed)) {
-		ChangeCharColor(sf::Color::Black); 
+		ChangeCharColor(sf::Color::Black);
 	}
 	else {
 		ChangeCharColor(sf::Color::Red);
@@ -120,8 +120,19 @@ void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
 }
 
 bool TextboxModel::CheckCharCorrect(int _key_code, bool _shift_pressed) {
-	char temp = _shift_pressed ? 'A' : 'a';
-	return (int)(temp + _key_code) == (int)used_str_[pointer_].character;
+	if (_key_code == 57) {
+		return pointer_ == used_str_.size();
+	}
+	if (_key_code > -1 && _key_code < 26) {
+		if (pointer_ == used_str_.size()) {
+			return false;
+		}
+
+		char temp = _shift_pressed ? 'A' : 'a';
+		return (int)(temp + _key_code) == (int)used_str_[pointer_].character;
+	}
+
+	return false;
 }
 
 const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
