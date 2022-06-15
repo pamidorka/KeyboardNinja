@@ -10,11 +10,9 @@ private:
 	const int kCharNeed = 5;
 
 	Clock clock_;
-	double time_;
-	int char_count_;
-	int error_count_;
-
-	string ClockFormatString(double _seconds_total);
+	double time_ = 0;
+	int char_count_ = 0;
+	int error_count_ = 0;
 
 public:
 
@@ -25,10 +23,13 @@ public:
 	void TimeUpdate();
 	void DrawRemainingTime(sf::RenderWindow* _window);
 	void Draw(sf::RenderWindow* _window);
+	string ClockFormatString(double _seconds_total);
 
 	double GetRemainingTime();
-	bool GetTimeState();
 	int GetWPM();
+	int GetAccuracy();
 	double GetTime();
+	int GetCharCount();
+	int GetErrorCount();
 
 };

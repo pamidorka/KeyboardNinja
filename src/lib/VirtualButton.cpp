@@ -1,18 +1,13 @@
 #include "VirtualButton.h"
 
-VirtualButton::VirtualButton(const double _width, const double _height, const double _x, const double _y, const int _character) {
+VirtualButton::VirtualButton(const double _width, const double _height, const double _x, const double _y) {
 	SetSize(_width, _height);
-	SetKeyCode(_character);
 	SetPosition(_x, _y);
 }
 
 void VirtualButton::SetSize(const double _width, const double _height) {
 	this->size_.x = _width;
 	this->size_.y = _height;
-}
-
-void VirtualButton::SetKeyCode(const int _character) {
-	this->keycode_ = _character;
 }
 
 void VirtualButton::SetPosition(const double _width, const double _height) {
@@ -30,10 +25,6 @@ void VirtualButton::SetColor(const sf::Color _color) {
 
 void VirtualButton::SetCharacterColor(const sf::Color _color) {
 	this->character_color_ = _color;
-}
-
-int VirtualButton::GetKeyCode() {
-	return this->keycode_;
 }
 
 std::string VirtualButton::GetCharacter() {

@@ -131,3 +131,7 @@ const std::vector <TextboxModel::TextChar>& TextboxModel::GetUsedStr() {
 const std::list <std::string>& TextboxModel::GetList() {
 	return this->list_string_;
 }
+
+int TextboxModel::GetPointer() {
+	return this->pointer_;
+}

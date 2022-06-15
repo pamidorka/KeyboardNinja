@@ -18,8 +18,8 @@ private:
 	std::list <std::string> list_string_;
 	std::vector <TextChar> used_str_;
 
-	int pointer_;
-	double used_window_;
+	int pointer_ = 0;
+	double used_window_ = 0;
 
 public:
 
@@ -37,6 +37,7 @@ public:
 
 	const std::vector <TextChar>& GetUsedStr();
 	const std::list <std::string>& GetList();
+	int GetPointer();
 
 };
 
@@ -67,5 +68,4 @@ public:
 	void Draw(sf::RenderWindow* _window);
 	void SetSize(const double _width, const double _height);
 	void SetPosition(const double _width, const double _height);
-
 };
