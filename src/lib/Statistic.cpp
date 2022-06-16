@@ -38,7 +38,9 @@ void Statistic::DrawRemainingTime(sf::RenderWindow* _window)
     text.setFont(settings_->GetDefaultFont());
     text.setFillColor(sf::Color::Black);
     text.setPosition(100, 50);
-    text.setString("Remaining time " + Settings::ClockFormatString(GetRemainingTime()));
+    text.setString(
+            "Remaining time "
+            + Settings::ClockFormatString(GetRemainingTime()));
     _window->draw(text);
 }
 

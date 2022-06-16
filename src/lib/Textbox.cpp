@@ -59,8 +59,7 @@ void TextboxView::Draw(sf::RenderWindow* _window)
         _window->draw(text);
     }
     dx += 10;
-    for (auto i = model_->GetList().cbegin();
-         i != model_->GetList().cend();
+    for (auto i = model_->GetList().cbegin(); i != model_->GetList().cend();
          i++) {
         text.setFillColor(model_->kStandartCharColor);
         text.setString((*i));
