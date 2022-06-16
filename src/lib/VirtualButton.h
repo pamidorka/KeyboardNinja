@@ -17,13 +17,13 @@ private:
 
 public:
 
-	VirtualButton(const double _width = 60, const double _height = 60, const double _x = 0, const double _y = 0);
+	VirtualButton(double _width = 60, double _height = 60, double _x = 0, double _y = 0);
 
-	void SetSize(const double _width, const double _height);
-	void SetPosition(const double _width, const double _height);
+	void SetSize(double _width, double _height);
+	void SetPosition(double _width, double _height);
 	void SetCharacter(std::string _symbol);
-	void SetColor(const sf::Color _color);
-	void SetCharacterColor(const sf::Color _color);
+	void SetColor(sf::Color _color);
+	void SetCharacterColor(sf::Color _color);
 
 	std::string GetCharacter();
 	Options GetSize();

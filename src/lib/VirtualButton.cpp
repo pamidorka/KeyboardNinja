@@ -1,29 +1,29 @@
 #include "VirtualButton.h"
 
-VirtualButton::VirtualButton(const double _width, const double _height, const double _x, const double _y) {
+VirtualButton::VirtualButton(double _width, double _height, double _x, double _y) {
 	SetSize(_width, _height);
 	SetPosition(_x, _y);
 }
 
-void VirtualButton::SetSize(const double _width, const double _height) {
+void VirtualButton::SetSize(double _width, double _height) {
 	this->size_.x = _width;
 	this->size_.y = _height;
 }
 
-void VirtualButton::SetPosition(const double _width, const double _height) {
+void VirtualButton::SetPosition(double _width, double _height) {
 	this->position_.x = _width;
 	this->position_.y = _height;
 }
 
-void VirtualButton::SetCharacter(const std::string _symbol) {
+void VirtualButton::SetCharacter(std::string _symbol) {
 	this->character_ = _symbol;
 }
 
-void VirtualButton::SetColor(const sf::Color _color) {
+void VirtualButton::SetColor(sf::Color _color) {
 	this->color_ = _color;
 }
 
-void VirtualButton::SetCharacterColor(const sf::Color _color) {
+void VirtualButton::SetCharacterColor(sf::Color _color) {
 	this->character_color_ = _color;
 }
 
