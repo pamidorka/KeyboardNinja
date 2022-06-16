@@ -15,7 +15,7 @@
   3. Keyboard visualisation </br>
      &emsp;Displays the virtual keyboard that shows currently pressed keys by user.
 ### Format description
-  The set of words is stored in .txt file extension. User can load his own set of words.
+  The set of words is stored in .txt file extension. User can change the difficulty of the typing test. Each difficulty has its own set of words.
 ## Development stages
 ### Used technologies
   SFML (open-source library based on C++ programming language) was used to develop this program.
