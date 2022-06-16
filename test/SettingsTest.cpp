@@ -67,3 +67,14 @@ CTEST(settings_tests, change_font_size_settings_val) {
     s.SetFontSizeSettingsVal(true);
     ASSERT_TRUE(s.GetFontSizeSettingsVal());
 }
+
+CTEST(settings_tests, clock_format) {
+    ASSERT_STR("00:00", Settings::ClockFormatString(0).c_str());
+	ASSERT_STR("00:05", Settings::ClockFormatString(5).c_str());
+    ASSERT_STR("00:59", Settings::ClockFormatString(59).c_str());
+    ASSERT_STR("01:00", Settings::ClockFormatString(60).c_str());
+    ASSERT_STR("07:30", Settings::ClockFormatString(450).c_str());
+    ASSERT_STR("15:00", Settings::ClockFormatString(900).c_str());
+    ASSERT_STR("90:00", Settings::ClockFormatString(5400).c_str());
+    ASSERT_STR("100:00", Settings::ClockFormatString(6000).c_str());
+}
