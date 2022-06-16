@@ -52,3 +52,8 @@ void MultipleButtons::Render(sf::RenderTarget* _target)
         buttons_[i].Render(_target);
     }
 }
+
+size_t MultipleButtons::ButtonCount() const
+{
+    return buttons_.size();
+}

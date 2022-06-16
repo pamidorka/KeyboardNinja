@@ -18,4 +18,6 @@ public:
 
     bool Update(sf::Vector2f _mouse_pos, bool _mouse_pressed);
     void Render(sf::RenderTarget* _target);
+
+    size_t ButtonCount() const;
 };
