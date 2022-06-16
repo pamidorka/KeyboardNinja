@@ -15,7 +15,7 @@ private:
 	};
 
 	sf::RenderWindow* window_;
-	Vector2f mouse_pos_;
+	sf::Vector2f mouse_pos_;
 	bool mouse_pressed_;
 
 	Settings* settings_;

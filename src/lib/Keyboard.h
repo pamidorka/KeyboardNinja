@@ -12,6 +12,7 @@ private:
 		double y;
 	};
 
+	int button_size_ = 60;
 	VirtualButton* buttons_;
 	Settings* settings_;
 	Position position_;
@@ -25,6 +26,7 @@ public:
 	~VirtualKeyboard();
 
 	void SetPosition(double _x, double _y);
+	void SetButtonSize(int _size);
 	void ChangePressedKey(int _key);
 	void ChangeReleasedKey(int _key);
 	void Reset();

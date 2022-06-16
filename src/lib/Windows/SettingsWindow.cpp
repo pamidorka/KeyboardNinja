@@ -1,11 +1,11 @@
 #include "SettingsWindow.h"
 
-const ButtonColorSet SettingsWindow::kColorsDisabled = ButtonColorSet(Color(0x660000FF), Color(0xAA3333FF), Color(0xFF5555FF));
-const ButtonColorSet SettingsWindow::kColorsEnabled = ButtonColorSet(Color(0x006600FF), Color(0x119911FF), Color(0x22BB22FF));
-const ButtonColorSet SettingsWindow::kColorsDefaultBtn = ButtonColorSet(Color(0x666666FF), Color(0x888888FF), Color(0xAAAAAAFF));
+const ButtonColorSet SettingsWindow::kColorsDisabled = ButtonColorSet(sf::Color(0x660000FF), sf::Color(0xAA3333FF), sf::Color(0xFF5555FF));
+const ButtonColorSet SettingsWindow::kColorsEnabled = ButtonColorSet(sf::Color(0x006600FF), sf::Color(0x119911FF), sf::Color(0x22BB22FF));
+const ButtonColorSet SettingsWindow::kColorsDefaultBtn = ButtonColorSet(sf::Color(0x666666FF), sf::Color(0x888888FF), sf::Color(0xAAAAAAFF));
 
-SettingsWindow::SettingsWindow(Settings& _settings) : mouse_pos_(Vector2f(-1, -1)), mouse_pressed_(false), settings_(&_settings),
-font_size_button(290, 50, 80, 60, &settings_->GetDefaultFont(), to_string(settings_->kDefaultTextSize + 8), to_string(settings_->kDefaultTextSize), settings_->kDefaultTextSize, kColorsDefaultBtn, kColorsDefaultBtn),
+SettingsWindow::SettingsWindow(Settings& _settings) : mouse_pos_(sf::Vector2f(-1, -1)), mouse_pressed_(false), settings_(&_settings),
+font_size_button(290, 50, 80, 60, &settings_->GetDefaultFont(), std::to_string(settings_->kDefaultTextSize + 8), std::to_string(settings_->kDefaultTextSize), settings_->kDefaultTextSize, kColorsDefaultBtn, kColorsDefaultBtn),
 test_length_increase_btn_(270, 350, 30, 15, &settings_->GetDefaultFont(), "", 12, kColorsDefaultBtn),
 test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12, kColorsDefaultBtn) {
 
@@ -17,7 +17,7 @@ test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12
     text_font_buttons_.AddButton(times_new_roman_font_btn);
 
     text_sample_.setPosition(290, 150);
-    text_sample_.setFillColor(Color::Black);
+    text_sample_.setFillColor(sf::Color::Black);
     text_sample_.setString("Text Sample");
     text_sample_.setFont(settings_->GetFont());
     text_sample_.setCharacterSize(settings_->GetTextSize());
@@ -30,20 +30,20 @@ test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12
     difficulty_buttons_.AddButton(hard_diff_btn);
 
     test_length_label_.setPosition(50, 350);
-    test_length_label_.setFillColor(Color::Black);
+    test_length_label_.setFillColor(sf::Color::Black);
     test_length_label_.setString("Test length:");
     test_length_label_.setFont(settings_->GetDefaultFont());
     test_length_label_.setCharacterSize(settings_->kDefaultTextSize);
 
     test_length_value_.setPosition(200, 350);
-    test_length_value_.setFillColor(Color::Black);
+    test_length_value_.setFillColor(sf::Color::Black);
     test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
     test_length_value_.setFont(settings_->GetDefaultFont());
     test_length_value_.setCharacterSize(settings_->kDefaultTextSize);
 }
 
 void SettingsWindow::Show() {
-    window_.create(VideoMode(600, 430), "Settings", Style::Close);
+    window_.create(sf::VideoMode(600, 430), "Settings", sf::Style::Close);
 
     difficulty_buttons_.SetActiveButtonId(settings_->GetDifficultySettingsId());
     text_font_buttons_.SetActiveButtonId(settings_->GetFontSettingsId());
@@ -51,19 +51,19 @@ void SettingsWindow::Show() {
 
     Render();
     while (window_.isOpen()) {
-        Event event;
+        sf::Event event;
         while (window_.pollEvent(event)) {
-            if (event.type == Event::Closed) {
+            if (event.type == sf::Event::Closed) {
                 window_.close();
                 break;
             }
-            else if (event.type == Event::MouseMoved) {
-                mouse_pos_ = Vector2f(event.mouseMove.x, event.mouseMove.y);
+            else if (event.type == sf::Event::MouseMoved) {
+                mouse_pos_ = sf::Vector2f(event.mouseMove.x, event.mouseMove.y);
             }
-            else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+            else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 mouse_pressed_ = true;
             }
-            else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left) {
+            else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
                 mouse_pressed_ = false;
             }
 
@@ -107,12 +107,12 @@ void SettingsWindow::Show() {
                 text_sample_.setCharacterSize(settings_->GetTextSize());
             }
             if (test_length_increase_btn_.Update(mouse_pos_, mouse_pressed_)) {
-                int new_length = min(settings_->GetTestLengthInSeconds() + kDeltaTime, 30 * 60);
+                int new_length = std::min(settings_->GetTestLengthInSeconds() + kDeltaTime, 30 * 60);
                 settings_->SetTestLengthInSeconds(new_length);
                 test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
             if (test_length_decrease_btn_.Update(mouse_pos_, mouse_pressed_)) {
-                int new_length = max(settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
+                int new_length = std::max(settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
                 settings_->SetTestLengthInSeconds(new_length);
                 test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
@@ -122,21 +122,21 @@ void SettingsWindow::Show() {
     }
 }
 
-string SettingsWindow::ClockFormatString(int _seconds_total) {
+std::string SettingsWindow::ClockFormatString(int _seconds_total) {
     int minutes = _seconds_total / 60;
     int seconds = _seconds_total % 60;
 
-    string s = (minutes < 10) ? "0" : "";
-    s += to_string(minutes);
+    std::string s = (minutes < 10) ? "0" : "";
+    s += std::to_string(minutes);
     s += ":";
     s += (seconds < 10) ? "0" : "";
-    s += to_string(seconds);
+    s += std::to_string(seconds);
 
     return s;
 }
 
 void SettingsWindow::Render() {
-    window_.clear(Color::White);
+    window_.clear(sf::Color::White);
 
     window_.draw(text_sample_);
     difficulty_buttons_.Render(&window_);

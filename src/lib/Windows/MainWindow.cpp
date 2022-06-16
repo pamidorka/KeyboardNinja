@@ -1,9 +1,9 @@
 #include "MainWindow.h"
 
-const ButtonColorSet MainWindow::kColorsSettingsBtn = ButtonColorSet(Color(0x666666FF), Color(0x888888FF), Color(0xAAAAAAFF));
+const ButtonColorSet MainWindow::kColorsSettingsBtn = ButtonColorSet(sf::Color(0x666666FF), sf::Color(0x888888FF), sf::Color(0xAAAAAAFF));
 
 MainWindow::MainWindow() {
-	mouse_pos_ = Vector2f(-1, -1);
+	mouse_pos_ = sf::Vector2f(-1, -1);
 	mouse_pressed_ = false;
 
 	settings_ = new Settings;
@@ -46,7 +46,7 @@ void MainWindow::RenderResult() {
 }
 
 void MainWindow::Show() {
-	window_ = new sf::RenderWindow(sf::VideoMode(1200, 600), "Keyboard Ninja", Style::Close);
+	window_ = new sf::RenderWindow(sf::VideoMode(1200, 600), "Keyboard Ninja", sf::Style::Close);
 	while (window_->isOpen()) {
 		if (statistic_->GetRemainingTime() <= 0) {
 			state_ = TestState::RESULT;
@@ -56,13 +56,13 @@ void MainWindow::Show() {
 			if (event.type == sf::Event::Closed) {
 				window_->close();
 			}
-			else if (event.type == Event::MouseMoved) {
-				mouse_pos_ = Vector2f(event.mouseMove.x, event.mouseMove.y);
+			else if (event.type == sf::Event::MouseMoved) {
+				mouse_pos_ = sf::Vector2f(event.mouseMove.x, event.mouseMove.y);
 			}
-			else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 				mouse_pressed_ = true;
 			}
-			else if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left) {
+			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 				mouse_pressed_ = false;
 			}
 
