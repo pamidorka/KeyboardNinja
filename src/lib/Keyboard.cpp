@@ -36,7 +36,7 @@ VirtualKeyboard::VirtualKeyboard(Settings* _settings) {
 		buttons_[22].SetPosition(button_size_ + kSizeOfOutline_, 0);
 		buttons_[23].SetPosition(button_size_ + kSizeOfOutline_, 2 * (button_size_ + kSizeOfOutline_));
 		buttons_[24].SetPosition(5 * (button_size_ + kSizeOfOutline_), 0);
-		buttons_[25].SetPosition(0, 2 * (button_size_ + 2));
+		buttons_[25].SetPosition(0, 2 * (button_size_ + kSizeOfOutline_));
 		buttons_[26].SetPosition(button_size_ + kSizeOfOutline_, 3 * (button_size_ + kSizeOfOutline_));
 		buttons_[27].SetPosition(7 * (button_size_ + kSizeOfOutline_), 2 * (button_size_ + kSizeOfOutline_));
 

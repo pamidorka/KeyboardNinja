@@ -55,14 +55,15 @@ void Statistic::DrawRemainingTime(sf::RenderWindow* _window) {
 
 void Statistic::Draw(sf::RenderWindow* _window) {
 	sf::Text text;
+	int x_pos = 1200 / 2 - 100;
 	text.setFont(this->settings_->GetDefaultFont());
 	text.setFillColor(sf::Color::Black);
-	text.setPosition(1200 / 2 - 50, 600 / 2 - 50);
+	text.setPosition(x_pos, 600 / 2 - 50);
 	text.setString("WPM " + std::to_string(GetWPM()));
 
 	_window->draw(text);
 
-	text.setPosition(1200 / 2 - 50, 600 / 2);
+	text.setPosition(x_pos, 600 / 2);
 	switch (this->settings_->GetDifficultySettingsId()) {
 	case 0:
 		text.setString("Difficulty easy");
@@ -80,12 +81,12 @@ void Statistic::Draw(sf::RenderWindow* _window) {
 
 	_window->draw(text);
 
-	text.setPosition(1200 / 2 - 50, 600 / 2 + 50);
-	text.setString("Total length " + ClockFormatString(this->settings_->GetTestLengthInSeconds()));
+	text.setPosition(x_pos, 600 / 2 + 50);
+	text.setString("Testing time " + ClockFormatString(this->settings_->GetTestLengthInSeconds()));
 
 	_window->draw(text);
 
-	text.setPosition(1200 / 2 - 50, 600 / 2 + 100);
+	text.setPosition(x_pos, 600 / 2 + 100);
 	if (this->char_count_ > 0) {
 		text.setString("Accuracy " + std::to_string(GetAccuracy()) + "%");
 	}
