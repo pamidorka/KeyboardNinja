@@ -1,14 +1,6 @@
 #include "src/lib/Statistic.h"
 #include "thirdparty/ctest.h"
 
-CTEST(stat_suite_, clock_test)
-{
-    Settings tmp;
-    Statistic temp(&tmp);
-    std::string s = temp.ClockFormatString(10);
-    ASSERT_STR("00:10", s.c_str());
-}
-
 CTEST(stat_suite_, count_test_)
 {
     Settings tmp;
