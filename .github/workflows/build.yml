@@ -10,7 +10,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Check codestyle
-        run: git ls-files *.{c,h} | xargs clang-format -i --verbose && git diff --exit-code
+        run: git ls-files *.{cpp,h} | xargs clang-format -i --verbose && git diff --exit-code
 
       - name: Build application
-        run: make sudo apt-get update sudo apt-get install libsfml-dev
+        run: make  
+        run: sudo apt-get update
+        run: sudo apt-get install libsfml-dev
