@@ -11,6 +11,20 @@ void Settings::LoadDefaultFont()
     }
 }
 
+std::string Settings::ClockFormatString(int _seconds_total)
+{
+    int minutes = _seconds_total / 60;
+    int seconds = _seconds_total % 60;
+
+    string s = (minutes < 10) ? "0" : "";
+    s += std::to_string(minutes);
+    s += ":";
+    s += (seconds < 10) ? "0" : "";
+    s += std::to_string(seconds);
+
+    return s;
+}
+
 Settings::Settings()
 {
     if (!LoadVocabularyFromCSV(kDefaultVocabularyFileName)) {

@@ -26,6 +26,8 @@ public:
     static const std::string kDefaultFontFileName;
     static const unsigned int kDefaultTextSize;
 
+    static std::string ClockFormatString(int _seconds_total);
+
     Settings();
 
     bool LoadVocabularyFromCSV(std::string _file_name);
