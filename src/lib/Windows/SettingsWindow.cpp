@@ -208,15 +208,15 @@ void SettingsWindow::Show()
                         settings_->GetTestLengthInSeconds() + kDeltaTime,
                         30 * 60);
                 settings_->SetTestLengthInSeconds(new_length);
-                test_length_value_.setString(
-                        Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
+                test_length_value_.setString(Settings::ClockFormatString(
+                        settings_->GetTestLengthInSeconds()));
             }
             if (test_length_decrease_btn_.Update(mouse_pos_, mouse_pressed_)) {
                 int new_length = std::max(
                         settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
                 settings_->SetTestLengthInSeconds(new_length);
-                test_length_value_.setString(
-                        Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
+                test_length_value_.setString(Settings::ClockFormatString(
+                        settings_->GetTestLengthInSeconds()));
             }
 
             Render();
