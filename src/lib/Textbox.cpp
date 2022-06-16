@@ -69,15 +69,15 @@ TextboxModel::TextboxModel(Settings* _settings) {
 }
 
 void TextboxModel::MovePointer(int _key_code, bool _shift_pressed) {
-	if (_key_code == 57) NewWord();
-	if (_key_code < 26 && _key_code > -1) {
+	if (_key_code == sf::Keyboard::Space) NewWord();
+	if (_key_code < sf::Keyboard::Num0 && _key_code > sf::Keyboard::Unknown) {
 		if ((size_t)pointer_ >= used_str_.size()) NewWord();
 		else {
 			ChooseCharColor(_key_code, _shift_pressed);
 			pointer_++;
 		}
 	}
-	if (_key_code == 59 && pointer_ > 0) {
+	if (_key_code == sf::Keyboard::BackSpace && pointer_ > 0) {
 		pointer_--;
 		ChangeCharColor(this->kStandartCharColor);
 	}
@@ -106,11 +106,11 @@ void TextboxModel::LoadList() {
 	}
 }
 
-void TextboxModel::ChangeCharColor(const sf::Color _color) {
+void TextboxModel::ChangeCharColor(sf::Color _color) {
 	used_str_[pointer_].color = _color;
 }
 
-void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
+void TextboxModel::ChooseCharColor(int _key, bool _shift_pressed) {
 	if (CheckCharCorrect(_key, _shift_pressed)) {
 		ChangeCharColor(sf::Color::Black);
 	}
@@ -120,10 +120,10 @@ void TextboxModel::ChooseCharColor(const int _key, bool _shift_pressed) {
 }
 
 bool TextboxModel::CheckCharCorrect(int _key_code, bool _shift_pressed) {
-	if (_key_code == 57) {
+	if (_key_code == sf::Keyboard::Space) {
 		return (size_t)pointer_ == used_str_.size();
 	}
-	if (_key_code > -1 && _key_code < 26) {
+	if (_key_code > sf::Keyboard::Unknown && _key_code < sf::Keyboard::Num0) {
 		if ((size_t)pointer_ == used_str_.size()) {
 			return false;
 		}

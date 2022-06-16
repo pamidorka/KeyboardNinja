@@ -14,12 +14,12 @@ void Statistic::Restart() {
 void Statistic::Count(int _key_code, bool _correct) {
 	this->char_count_++;
 
-	if ((_key_code < 26 && _key_code > -1) || _key_code == 57) {
+	if ((_key_code < sf::Keyboard::Num0 && _key_code > sf::Keyboard::Unknown) || _key_code == sf::Keyboard::Space) {
 		if (!_correct) {
 			this->error_count_++;
 		}
 	}
-	else if (_key_code == 59) {
+	else if (_key_code == sf::Keyboard::BackSpace) {
 		this->error_count_++;
 	}
 }

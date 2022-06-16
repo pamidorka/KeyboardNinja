@@ -66,6 +66,6 @@ public:
 	void Restart();
 	bool CheckCharCorrect(int _key_code, bool _shift_pressed);
 	void Draw(sf::RenderWindow* _window);
-	void SetSize(const double _width, const double _height);
-	void SetPosition(const double _width, const double _height);
+	void SetSize(double _width, double _height);
+	void SetPosition(double _width, double _height);
 };
