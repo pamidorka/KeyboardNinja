@@ -60,15 +60,15 @@ void VirtualKeyboard::SetPosition(double _x, double _y) {
 }
 
 void VirtualKeyboard::ChangePressedKey(int _key) {
-	if ((_key < 0 || _key > 25) && _key != 57 && _key != 42 && _key != 38) {
+	if ((_key < sf::Keyboard::A || _key > sf::Keyboard::Z) && _key != sf::Keyboard::Space && _key != sf::Keyboard::RShift && _key != sf::Keyboard::LShift) {
 		return;
 	}
-	if (_key == 57) {
+	if (_key == sf::Keyboard::Space) {
 		buttons_[26].SetColor(sf::Color::Black);
 		buttons_[26].SetCharacterColor(sf::Color::White);
 		return;
 	}
-	if (_key == 42 || _key == 38) {
+	if (_key == sf::Keyboard::RShift || _key == sf::Keyboard::LShift) {
 		buttons_[27].SetColor(sf::Color::Black);
 		buttons_[27].SetCharacterColor(sf::Color::White);
 		return;
@@ -79,15 +79,15 @@ void VirtualKeyboard::ChangePressedKey(int _key) {
 }
 
 void VirtualKeyboard::ChangeReleasedKey(int _key) {
-	if ((_key < 0 || _key > 25) && _key != 57 && _key != 42 && _key != 38) {
+	if ((_key < sf::Keyboard::A || _key > sf::Keyboard::Z) && _key != sf::Keyboard::Space && _key != sf::Keyboard::RShift && _key != sf::Keyboard::LShift) {
 		return;
 	}
-	if (_key == 57) {
+	if (_key == sf::Keyboard::Space) {
 		buttons_[26].SetColor(sf::Color::White);
 		buttons_[26].SetCharacterColor(sf::Color::Black);
 		return;
 	}
-	if (_key == 42 || _key == 38) {
+	if (_key == sf::Keyboard::RShift || _key == sf::Keyboard::LShift) {
 		buttons_[27].SetColor(sf::Color::White);
 		buttons_[27].SetCharacterColor(sf::Color::Black);
 		return;
