@@ -36,10 +36,10 @@ std::string Statistic::ClockFormatString(double _seconds_total) {
 	int seconds = (int)_seconds_total % 60;
 
 	std::string s = (minutes < 10) ? "0" : "";
-	s += to_string(minutes);
+	s += std::to_string(minutes);
 	s += ":";
 	s += (seconds < 10) ? "0" : "";
-	s += to_string(seconds);
+	s += std::to_string(seconds);
 
 	return s;
 }
@@ -47,7 +47,7 @@ std::string Statistic::ClockFormatString(double _seconds_total) {
 void Statistic::DrawRemainingTime(sf::RenderWindow* _window) {
 	sf::Text text;
 	text.setFont(this->settings_->GetDefaultFont());
-	text.setFillColor(Color::Black);
+	text.setFillColor(sf::Color::Black);
 	text.setPosition(100, 50);
 	text.setString("Remaining time " + ClockFormatString(GetRemainingTime()));
 	_window->draw(text);
@@ -56,9 +56,9 @@ void Statistic::DrawRemainingTime(sf::RenderWindow* _window) {
 void Statistic::Draw(sf::RenderWindow* _window) {
 	sf::Text text;
 	text.setFont(this->settings_->GetDefaultFont());
-	text.setFillColor(Color::Black);
+	text.setFillColor(sf::Color::Black);
 	text.setPosition(1200 / 2 - 50, 600 / 2 - 50);
-	text.setString("WPM " + to_string(GetWPM()));
+	text.setString("WPM " + std::to_string(GetWPM()));
 
 	_window->draw(text);
 

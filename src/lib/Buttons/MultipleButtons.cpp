@@ -10,7 +10,7 @@ void MultipleButtons::AddButton(ToggleButton& _button) {
 
 const ToggleButton& MultipleButtons::GetButton(size_t _id) const {
 	if (_id >= buttons_.size()) {
-		throw out_of_range("Index is out of range");
+		throw std::out_of_range("Index is out of range");
 	}
 
 	return buttons_[_id];
@@ -28,7 +28,7 @@ int MultipleButtons::GetActiveButtonId() const {
 	return active_button_id_;
 }
 
-bool MultipleButtons::Update(Vector2f _mouse_pos, bool _mouse_pressed) {
+bool MultipleButtons::Update(sf::Vector2f _mouse_pos, bool _mouse_pressed) {
 	bool result = false;
 	for (size_t i = 0; i < buttons_.size(); i++) {
 		if (buttons_[i].Update(_mouse_pos, _mouse_pressed)) {
@@ -41,7 +41,7 @@ bool MultipleButtons::Update(Vector2f _mouse_pos, bool _mouse_pressed) {
 	return result;
 }
 
-void MultipleButtons::Render(RenderTarget* _target) {
+void MultipleButtons::Render(sf::RenderTarget* _target) {
 	for (size_t i = 0; i < buttons_.size(); i++) {
 		buttons_[i].Render(_target);
 	}

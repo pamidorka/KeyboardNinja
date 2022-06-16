@@ -6,14 +6,11 @@
 #include <sstream>
 #include <string>
 
-using namespace sf;
-using namespace std;
-
 class Settings {
 private:
-	vector<string> vocabulary_;
-	Font default_font_;
-	Font font_;
+	std::vector<std::string> vocabulary_;
+	sf::Font default_font_;
+	sf::Font font_;
 	unsigned int text_size_;
 
 	int test_length_in_seconds;
@@ -24,20 +21,20 @@ private:
 
 	void LoadDefaultFont();
 public:
-	static const string kDefaultVocabularyFileName; // CSV file
-	static const string kDefaultFontFileName;
+	static const std::string kDefaultVocabularyFileName; // CSV file
+	static const std::string kDefaultFontFileName;
 	static const unsigned int kDefaultTextSize;
 
 	Settings();
 
-	bool LoadVocabularyFromCSV(string _file_name);
-	bool LoadFont(string _file_name);
+	bool LoadVocabularyFromCSV(std::string _file_name);
+	bool LoadFont(std::string _file_name);
 	void SetTextSize(unsigned int _text_size);
 
 	size_t GetVocabularySize();
-	const string& GetWordAt(size_t _pos);
-	const Font& GetFont();
-	const Font& GetDefaultFont();
+	const std::string& GetWordAt(size_t _pos);
+	const sf::Font& GetFont();
+	const sf::Font& GetDefaultFont();
 	unsigned int GetTextSize();
 
 	int GetTestLengthInSeconds();

@@ -2,11 +2,9 @@
 #include "ToggleButton.h"
 #include <vector>
 
-using namespace std;
-
 class MultipleButtons {
 private:
-	vector<ToggleButton> buttons_;
+	std::vector<ToggleButton> buttons_;
 	int active_button_id_;
 
 public:
@@ -18,6 +16,6 @@ public:
 	void SetActiveButtonId(int _id);
 	int GetActiveButtonId() const;
 
-	bool Update(Vector2f _mouse_pos, bool _mouse_pressed);
-	void Render(RenderTarget* _target);
+	bool Update(sf::Vector2f _mouse_pos, bool _mouse_pressed);
+	void Render(sf::RenderTarget* _target);
 };

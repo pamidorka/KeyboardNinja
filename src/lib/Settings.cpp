@@ -1,18 +1,18 @@
 #include "Settings.h"
 
-const string Settings::kDefaultVocabularyFileName = "Easy.txt";
-const string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
+const std::string Settings::kDefaultVocabularyFileName = "Easy.txt";
+const std::string Settings::kDefaultFontFileName = "Roboto-Regular.ttf";
 const unsigned int Settings::kDefaultTextSize = 24;
 
 void Settings::LoadDefaultFont() {
 	if (!default_font_.loadFromFile("src/fonts/" + kDefaultFontFileName)) {
-		throw runtime_error("Failed to open the default font file.");
+		throw std::runtime_error("Failed to open the default font file.");
 	}
 }
 
 Settings::Settings() {
 	if (!LoadVocabularyFromCSV(kDefaultVocabularyFileName)) {
-		throw runtime_error("Failed to open the default vocabulary file.");
+		throw std::runtime_error("Failed to open the default vocabulary file.");
 	}
 	LoadDefaultFont();
 
@@ -26,22 +26,22 @@ Settings::Settings() {
 	test_length_in_seconds = 30;
 }
 
-bool Settings::LoadVocabularyFromCSV(string _file_name) {
-	ifstream file;
-	file.open("src/wordbase/" + _file_name, ifstream::in);
+bool Settings::LoadVocabularyFromCSV(std::string _file_name) {
+	std::ifstream file;
+	file.open("src/wordbase/" + _file_name, std::ifstream::in);
 
 	if (!file.is_open()) {
-		cerr << "Can't open the file \"" << _file_name << "\"." << endl;
+		std::cerr << "Can't open the file \"" << _file_name << "\"." << std::endl;
 		return false;
 	}
 
 	vocabulary_.clear();
 
-	string line;
+	std::string line;
 	getline(file, line);
 
-	stringstream line_stream(line);
-	string cell;
+	std::stringstream line_stream(line);
+	std::string cell;
 	while (getline(line_stream, cell, ',')) {
 		vocabulary_.push_back(cell);
 	}
@@ -49,7 +49,7 @@ bool Settings::LoadVocabularyFromCSV(string _file_name) {
 	return true;
 }
 
-bool Settings::LoadFont(string _file_name) {
+bool Settings::LoadFont(std::string _file_name) {
 	return font_.loadFromFile("src/fonts/" + _file_name);
 }
 
@@ -61,19 +61,19 @@ size_t Settings::GetVocabularySize() {
 	return vocabulary_.size();
 }
 
-const string& Settings::GetWordAt(size_t _pos) {
+const std::string& Settings::GetWordAt(size_t _pos) {
 	if (_pos >= vocabulary_.size()) {
-		throw out_of_range("Index is out of range");
+		throw std::out_of_range("Index is out of range");
 	}
 
 	return vocabulary_[_pos];
 }
 
-const Font& Settings::GetFont() {
+const sf::Font& Settings::GetFont() {
 	return font_;
 }
 
-const Font& Settings::GetDefaultFont() {
+const sf::Font& Settings::GetDefaultFont() {
 	return default_font_;
 }
 

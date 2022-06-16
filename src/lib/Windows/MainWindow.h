@@ -26,7 +26,6 @@ private:
 
 	bool shift_pressed_ = false;
 	TestState state_;
-	
 
 	static const ButtonColorSet kColorsSettingsBtn;
 

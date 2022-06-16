@@ -23,16 +23,16 @@ void Button::RefreshTextLocation() {
 	);
 }
 
-Button::Button(float _x, float _y, float _width, float _height, const Font* _font, const string &_text, unsigned int _text_size, const ButtonColorSet& _colors)
+Button::Button(float _x, float _y, float _width, float _height, const sf::Font* _font, const std::string &_text, unsigned int _text_size, const ButtonColorSet& _colors)
 	: colors_(_colors) {
 	button_state_ = ButtonStates::ButtonIdle;
 
-	shape_.setPosition(Vector2f(_x, _y));
-	shape_.setSize(Vector2f(_width, _height));
+	shape_.setPosition(sf::Vector2f(_x, _y));
+	shape_.setSize(sf::Vector2f(_width, _height));
 
 	font_ = _font;
 	text_.setFont(*font_);
-	text_.setFillColor(Color::White);
+	text_.setFillColor(sf::Color::White);
 	text_.setCharacterSize(_text_size);
 	SetText(_text);
 
@@ -43,7 +43,7 @@ Button::~Button() {
 
 }
 
-bool Button::IsMouseHover(Vector2f _mouse_pos) const {
+bool Button::IsMouseHover(sf::Vector2f _mouse_pos) const {
 	return shape_.getGlobalBounds().contains(_mouse_pos);
 }
 
@@ -51,7 +51,7 @@ void Button::SetColorSet(const ButtonColorSet& _color_set) {
 	colors_ = ButtonColorSet(_color_set);
 }
 
-void Button::SetText(const string& _s) {
+void Button::SetText(const std::string& _s) {
 	text_.setString(_s);
 }
 
@@ -59,15 +59,15 @@ ButtonStates Button::GetButtonState() const {
 	return button_state_;
 }
 
-const String& Button::GetTextString() const {
+const sf::String& Button::GetTextString() const {
 	return text_.getString();
 }
 
-const Font& Button::GetTextFont() const {
+const sf::Font& Button::GetTextFont() const {
 	return *font_;
 }
 
-const RectangleShape& Button::GetBounds() const {
+const sf::RectangleShape& Button::GetBounds() const {
 	return shape_;
 }
 
@@ -75,7 +75,7 @@ const ButtonColorSet& Button::GetButtonColorSet() const {
 	return colors_;
 }
 
-bool Button::Update(Vector2f _mouse_pos, bool _mouse_pressed) {
+bool Button::Update(sf::Vector2f _mouse_pos, bool _mouse_pressed) {
 	bool result = false;
 
 	switch (button_state_) {
@@ -121,7 +121,7 @@ bool Button::Update(Vector2f _mouse_pos, bool _mouse_pressed) {
 	return result;
 }
 
-void Button::Render(RenderTarget* _target) {
+void Button::Render(sf::RenderTarget* _target) {
 	_target->draw(shape_);
 
 	RefreshTextLocation();

@@ -9,7 +9,7 @@ private:
 
 	const int kCharNeed = 5;
 
-	Clock clock_;
+	sf::Clock clock_;
 	double time_ = 0;
 	int char_count_ = 0;
 	int error_count_ = 0;
@@ -23,7 +23,7 @@ public:
 	void TimeUpdate();
 	void DrawRemainingTime(sf::RenderWindow* _window);
 	void Draw(sf::RenderWindow* _window);
-	string ClockFormatString(double _seconds_total);
+	std::string ClockFormatString(double _seconds_total);
 
 	double GetRemainingTime();
 	int GetWPM();
