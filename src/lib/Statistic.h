@@ -21,7 +21,6 @@ public:
     void TimeUpdate();
     void DrawRemainingTime(sf::RenderWindow* _window);
     void Draw(sf::RenderWindow* _window);
-    std::string ClockFormatString(double _seconds_total);
 
     double GetRemainingTime();
     int GetWPM();

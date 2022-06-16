@@ -32,30 +32,13 @@ void Statistic::TimeUpdate()
     time_ = clock_.getElapsedTime().asSeconds();
 }
 
-std::string Statistic::ClockFormatString(double _seconds_total)
-{
-    if (_seconds_total <= 0) {
-        return std::string("00:00");
-    }
-    int minutes = (int)_seconds_total / 60;
-    int seconds = (int)_seconds_total % 60;
-
-    std::string s = (minutes < 10) ? "0" : "";
-    s += std::to_string(minutes);
-    s += ":";
-    s += (seconds < 10) ? "0" : "";
-    s += std::to_string(seconds);
-
-    return s;
-}
-
 void Statistic::DrawRemainingTime(sf::RenderWindow* _window)
 {
     sf::Text text;
     text.setFont(settings_->GetDefaultFont());
     text.setFillColor(sf::Color::Black);
     text.setPosition(100, 50);
-    text.setString("Remaining time " + ClockFormatString(GetRemainingTime()));
+    text.setString("Remaining time " + Settings::ClockFormatString(GetRemainingTime()));
     _window->draw(text);
 }
 
@@ -91,7 +74,7 @@ void Statistic::Draw(sf::RenderWindow* _window)
     text.setPosition(x_pos, 600 / 2 + 50);
     text.setString(
             "Testing time "
-            + ClockFormatString(settings_->GetTestLengthInSeconds()));
+            + Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
 
     _window->draw(text);
 
