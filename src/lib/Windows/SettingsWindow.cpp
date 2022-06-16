@@ -1,17 +1,79 @@
 #include "SettingsWindow.h"
 
-const ButtonColorSet SettingsWindow::kColorsDisabled = ButtonColorSet(sf::Color(0x660000FF), sf::Color(0xAA3333FF), sf::Color(0xFF5555FF));
-const ButtonColorSet SettingsWindow::kColorsEnabled = ButtonColorSet(sf::Color(0x006600FF), sf::Color(0x119911FF), sf::Color(0x22BB22FF));
-const ButtonColorSet SettingsWindow::kColorsDefaultBtn = ButtonColorSet(sf::Color(0x666666FF), sf::Color(0x888888FF), sf::Color(0xAAAAAAFF));
+const ButtonColorSet SettingsWindow::kColorsDisabled = ButtonColorSet(
+        sf::Color(0x660000FF), sf::Color(0xAA3333FF), sf::Color(0xFF5555FF));
+const ButtonColorSet SettingsWindow::kColorsEnabled = ButtonColorSet(
+        sf::Color(0x006600FF), sf::Color(0x119911FF), sf::Color(0x22BB22FF));
+const ButtonColorSet SettingsWindow::kColorsDefaultBtn = ButtonColorSet(
+        sf::Color(0x666666FF), sf::Color(0x888888FF), sf::Color(0xAAAAAAFF));
 
-SettingsWindow::SettingsWindow(Settings& _settings) : mouse_pos_(sf::Vector2f(-1, -1)), mouse_pressed_(false), settings_(&_settings),
-font_size_button(290, 50, 80, 60, &settings_->GetDefaultFont(), std::to_string(settings_->kDefaultTextSize + 8), std::to_string(settings_->kDefaultTextSize), settings_->kDefaultTextSize, kColorsDefaultBtn, kColorsDefaultBtn),
-test_length_increase_btn_(270, 350, 30, 15, &settings_->GetDefaultFont(), "", 12, kColorsDefaultBtn),
-test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12, kColorsDefaultBtn) {
-
-    ToggleButton roboto_font_btn(50, 50, 220, 60, &settings_->GetDefaultFont(), "Roboto", "Roboto", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
-    ToggleButton open_sans_font_btn(50, 120, 220, 60, &settings_->GetDefaultFont(), "Open Sans", "Open Sans", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
-    ToggleButton times_new_roman_font_btn(50, 190, 220, 60, &settings_->GetDefaultFont(), "Times New Roman", "Times New Roman", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
+SettingsWindow::SettingsWindow(Settings& _settings)
+    : mouse_pos_(sf::Vector2f(-1, -1)),
+      mouse_pressed_(false),
+      settings_(&_settings),
+      font_size_button(
+              290,
+              50,
+              80,
+              60,
+              &settings_->GetDefaultFont(),
+              std::to_string(settings_->kDefaultTextSize + 8),
+              std::to_string(settings_->kDefaultTextSize),
+              settings_->kDefaultTextSize,
+              kColorsDefaultBtn,
+              kColorsDefaultBtn),
+      test_length_increase_btn_(
+              270,
+              350,
+              30,
+              15,
+              &settings_->GetDefaultFont(),
+              "",
+              12,
+              kColorsDefaultBtn),
+      test_length_decrease_btn_(
+              270,
+              367,
+              30,
+              15,
+              &settings_->GetDefaultFont(),
+              "",
+              12,
+              kColorsDefaultBtn)
+{
+    ToggleButton roboto_font_btn(
+            50,
+            50,
+            220,
+            60,
+            &settings_->GetDefaultFont(),
+            "Roboto",
+            "Roboto",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
+    ToggleButton open_sans_font_btn(
+            50,
+            120,
+            220,
+            60,
+            &settings_->GetDefaultFont(),
+            "Open Sans",
+            "Open Sans",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
+    ToggleButton times_new_roman_font_btn(
+            50,
+            190,
+            220,
+            60,
+            &settings_->GetDefaultFont(),
+            "Times New Roman",
+            "Times New Roman",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
     text_font_buttons_.AddButton(roboto_font_btn);
     text_font_buttons_.AddButton(open_sans_font_btn);
     text_font_buttons_.AddButton(times_new_roman_font_btn);
@@ -22,9 +84,39 @@ test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12
     text_sample_.setFont(settings_->GetFont());
     text_sample_.setCharacterSize(settings_->GetTextSize());
 
-    ToggleButton easy_diff_btn(50, 280, 150, 60, &settings_->GetDefaultFont(), "Easy", "Easy", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
-    ToggleButton normal_diff_btn(220, 280, 150, 60, &settings_->GetDefaultFont(), "Normal", "Normal", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
-    ToggleButton hard_diff_btn(390, 280, 150, 60, &settings_->GetDefaultFont(), "Hard", "Hard", settings_->kDefaultTextSize, kColorsEnabled, kColorsDisabled);
+    ToggleButton easy_diff_btn(
+            50,
+            280,
+            150,
+            60,
+            &settings_->GetDefaultFont(),
+            "Easy",
+            "Easy",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
+    ToggleButton normal_diff_btn(
+            220,
+            280,
+            150,
+            60,
+            &settings_->GetDefaultFont(),
+            "Normal",
+            "Normal",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
+    ToggleButton hard_diff_btn(
+            390,
+            280,
+            150,
+            60,
+            &settings_->GetDefaultFont(),
+            "Hard",
+            "Hard",
+            settings_->kDefaultTextSize,
+            kColorsEnabled,
+            kColorsDisabled);
     difficulty_buttons_.AddButton(easy_diff_btn);
     difficulty_buttons_.AddButton(normal_diff_btn);
     difficulty_buttons_.AddButton(hard_diff_btn);
@@ -37,12 +129,14 @@ test_length_decrease_btn_(270, 367, 30, 15, &settings_->GetDefaultFont(), "", 12
 
     test_length_value_.setPosition(200, 350);
     test_length_value_.setFillColor(sf::Color::Black);
-    test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
+    test_length_value_.setString(
+            ClockFormatString(settings_->GetTestLengthInSeconds()));
     test_length_value_.setFont(settings_->GetDefaultFont());
     test_length_value_.setCharacterSize(settings_->kDefaultTextSize);
 }
 
-void SettingsWindow::Show() {
+void SettingsWindow::Show()
+{
     window_.create(sf::VideoMode(600, 430), "Settings", sf::Style::Close);
 
     difficulty_buttons_.SetActiveButtonId(settings_->GetDifficultySettingsId());
@@ -56,14 +150,15 @@ void SettingsWindow::Show() {
             if (event.type == sf::Event::Closed) {
                 window_.close();
                 break;
-            }
-            else if (event.type == sf::Event::MouseMoved) {
+            } else if (event.type == sf::Event::MouseMoved) {
                 mouse_pos_ = sf::Vector2f(event.mouseMove.x, event.mouseMove.y);
-            }
-            else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+            } else if (
+                    event.type == sf::Event::MouseButtonPressed
+                    && event.mouseButton.button == sf::Mouse::Left) {
                 mouse_pressed_ = true;
-            }
-            else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+            } else if (
+                    event.type == sf::Event::MouseButtonReleased
+                    && event.mouseButton.button == sf::Mouse::Left) {
                 mouse_pressed_ = false;
             }
 
@@ -101,20 +196,27 @@ void SettingsWindow::Show() {
             }
             if (font_size_button.Update(mouse_pos_, mouse_pressed_)) {
                 bool font_size_btn_val = font_size_button.IsEnabled();
-                settings_->SetTextSize(font_size_btn_val ? Settings::kDefaultTextSize + 8 : Settings::kDefaultTextSize);
+                settings_->SetTextSize(
+                        font_size_btn_val ? Settings::kDefaultTextSize + 8
+                                          : Settings::kDefaultTextSize);
                 settings_->SetFontSizeSettingsVal(font_size_btn_val);
 
                 text_sample_.setCharacterSize(settings_->GetTextSize());
             }
             if (test_length_increase_btn_.Update(mouse_pos_, mouse_pressed_)) {
-                int new_length = std::min(settings_->GetTestLengthInSeconds() + kDeltaTime, 30 * 60);
+                int new_length = std::min(
+                        settings_->GetTestLengthInSeconds() + kDeltaTime,
+                        30 * 60);
                 settings_->SetTestLengthInSeconds(new_length);
-                test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
+                test_length_value_.setString(
+                        ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
             if (test_length_decrease_btn_.Update(mouse_pos_, mouse_pressed_)) {
-                int new_length = std::max(settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
+                int new_length = std::max(
+                        settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
                 settings_->SetTestLengthInSeconds(new_length);
-                test_length_value_.setString(ClockFormatString(settings_->GetTestLengthInSeconds()));
+                test_length_value_.setString(
+                        ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
 
             Render();
@@ -122,7 +224,8 @@ void SettingsWindow::Show() {
     }
 }
 
-std::string SettingsWindow::ClockFormatString(int _seconds_total) {
+std::string SettingsWindow::ClockFormatString(int _seconds_total)
+{
     int minutes = _seconds_total / 60;
     int seconds = _seconds_total % 60;
 
@@ -135,7 +238,8 @@ std::string SettingsWindow::ClockFormatString(int _seconds_total) {
     return s;
 }
 
-void SettingsWindow::Render() {
+void SettingsWindow::Render()
+{
     window_.clear(sf::Color::White);
 
     window_.draw(text_sample_);

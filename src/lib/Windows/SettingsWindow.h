@@ -1,6 +1,6 @@
 #pragma once
-#include "lib/Settings.h"
 #include "lib/Buttons/MultipleButtons.h"
+#include "lib/Settings.h"
 
 class SettingsWindow {
 private:
@@ -26,6 +26,7 @@ private:
     Button test_length_decrease_btn_;
 
     void Render();
+
 public:
     SettingsWindow() = delete;
     SettingsWindow(Settings& _settings);

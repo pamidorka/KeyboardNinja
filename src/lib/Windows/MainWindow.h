@@ -1,42 +1,36 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "lib/Keyboard.h"
+#include "lib/Statistic.h"
 #include "lib/Textbox.h"
 #include "lib/Windows/SettingsWindow.h"
-#include "lib/Statistic.h"
+#include <SFML/Graphics.hpp>
 
 class MainWindow {
 private:
+    enum class TestState { WAITING, TESTING, RESULT };
 
-	enum class TestState {
-		WAITING,
-		TESTING,
-		RESULT
-	};
+    sf::RenderWindow* window_;
+    sf::Vector2f mouse_pos_;
+    bool mouse_pressed_;
 
-	sf::RenderWindow* window_;
-	sf::Vector2f mouse_pos_;
-	bool mouse_pressed_;
+    Settings* settings_;
+    VirtualKeyboard* keyboard_;
+    TextboxView* textbox_;
+    Button* settings_btn_;
+    Statistic* statistic_;
 
-	Settings* settings_;
-	VirtualKeyboard* keyboard_;
-	TextboxView* textbox_;
-	Button* settings_btn_;
-	Statistic* statistic_;
+    bool shift_pressed_ = false;
+    TestState state_;
 
-	bool shift_pressed_ = false;
-	TestState state_;
+    static const ButtonColorSet kColorsSettingsBtn;
 
-	static const ButtonColorSet kColorsSettingsBtn;
-
-	void Render();
-	void RenderResult();
-	void Reset();
+    void Render();
+    void RenderResult();
+    void Reset();
 
 public:
+    MainWindow();
+    ~MainWindow();
 
-	MainWindow();
-	~MainWindow();
-
-	void Show();
+    void Show();
 };
