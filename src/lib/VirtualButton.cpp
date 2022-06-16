@@ -1,48 +1,60 @@
 #include "VirtualButton.h"
 
-VirtualButton::VirtualButton(const double _width, const double _height, const double _x, const double _y) {
-	SetSize(_width, _height);
-	SetPosition(_x, _y);
+VirtualButton::VirtualButton(
+        double _width, double _height, double _x, double _y)
+{
+    SetSize(_width, _height);
+    SetPosition(_x, _y);
 }
 
-void VirtualButton::SetSize(const double _width, const double _height) {
-	this->size_.x = _width;
-	this->size_.y = _height;
+void VirtualButton::SetSize(double _width, double _height)
+{
+    size_.x = _width;
+    size_.y = _height;
 }
 
-void VirtualButton::SetPosition(const double _width, const double _height) {
-	this->position_.x = _width;
-	this->position_.y = _height;
+void VirtualButton::SetPosition(double _width, double _height)
+{
+    position_.x = _width;
+    position_.y = _height;
 }
 
-void VirtualButton::SetCharacter(const std::string _symbol) {
-	this->character_ = _symbol;
+void VirtualButton::SetCharacter(std::string _symbol)
+{
+    character_ = _symbol;
 }
 
-void VirtualButton::SetColor(const sf::Color _color) {
-	this->color_ = _color;
+void VirtualButton::SetColor(sf::Color _color)
+{
+    color_ = _color;
 }
 
-void VirtualButton::SetCharacterColor(const sf::Color _color) {
-	this->character_color_ = _color;
+void VirtualButton::SetCharacterColor(sf::Color _color)
+{
+    character_color_ = _color;
 }
 
-std::string VirtualButton::GetCharacter() {
-	return this->character_;
+std::string VirtualButton::GetCharacter()
+{
+    return character_;
 }
 
-VirtualButton::Options VirtualButton::GetSize() {
-	return this->size_;
+VirtualButton::Options VirtualButton::GetSize()
+{
+    return size_;
 }
 
-VirtualButton::Options VirtualButton::GetPosition() {
-	return this->position_;
+VirtualButton::Options VirtualButton::GetPosition()
+{
+    return position_;
 }
 
-sf::Color VirtualButton::GetColor() {
-	return this->color_;
+sf::Color VirtualButton::GetColor()
+{
+    return color_;
 }
 
-sf::Color VirtualButton::GetCharacterColor() {
-	return this->character_color_;
+sf::Color VirtualButton::GetCharacterColor()
+{
+    return character_color_;
 }
