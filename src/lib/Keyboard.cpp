@@ -3,7 +3,7 @@
 VirtualKeyboard::VirtualKeyboard(Settings* _settings)
 {
     buttons_ = new VirtualButton[kNumberOfButtons_];
-    this->settings_ = _settings;
+    settings_ = _settings;
 
     for (int i = 0; i < kNumberOfButtons_ - 2; i++) {
         buttons_[i].SetCharacter(std::string((size_t)1, (char)('A' + i)));
@@ -92,8 +92,8 @@ VirtualKeyboard::~VirtualKeyboard()
 
 void VirtualKeyboard::SetPosition(double _x, double _y)
 {
-    this->position_.x = _x;
-    this->position_.y = _y;
+    position_.x = _x;
+    position_.y = _y;
 }
 
 void VirtualKeyboard::SetButtonSize(int _size)
@@ -147,7 +147,7 @@ void VirtualKeyboard::ChangeReleasedKey(int _key)
 
 void VirtualKeyboard::Reset()
 {
-    for (int i = 0; i < this->kNumberOfButtons_; i++) {
+    for (int i = 0; i < kNumberOfButtons_; i++) {
         buttons_[i].SetColor(sf::Color::White);
         buttons_[i].SetCharacterColor(sf::Color::Black);
     }
@@ -155,7 +155,7 @@ void VirtualKeyboard::Reset()
 
 VirtualKeyboard::Position VirtualKeyboard::GetPosition()
 {
-    return this->position_;
+    return position_;
 }
 
 void VirtualKeyboard::Draw(sf::RenderWindow* _window)
@@ -172,7 +172,7 @@ void VirtualKeyboard::Draw(sf::RenderWindow* _window)
         btn.setOutlineColor(sf::Color::Black);
 
         sf::Text text;
-        text.setFont(this->settings_->GetDefaultFont());
+        text.setFont(settings_->GetDefaultFont());
         text.setCharacterSize(kSizeOfCharacter_);
         text.setString(buttons_[i].GetCharacter());
         text.setPosition(sf::Vector2f(
@@ -187,5 +187,5 @@ void VirtualKeyboard::Draw(sf::RenderWindow* _window)
 
 VirtualButton* VirtualKeyboard::GetButtons()
 {
-    return this->buttons_;
+    return buttons_;
 }

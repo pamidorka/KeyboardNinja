@@ -60,7 +60,7 @@ bool Settings::LoadFont(std::string _file_name)
 
 void Settings::SetTextSize(unsigned int _text_size)
 {
-    this->text_size_ = _text_size;
+    text_size_ = _text_size;
 }
 
 size_t Settings::GetVocabularySize()

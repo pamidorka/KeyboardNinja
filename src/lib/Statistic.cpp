@@ -2,34 +2,34 @@
 
 Statistic::Statistic(Settings* _settings)
 {
-    this->settings_ = _settings;
+    settings_ = _settings;
 }
 
 void Statistic::Restart()
 {
     clock_.restart();
-    this->time_ = 0;
-    this->char_count_ = 0;
-    this->error_count_ = 0;
+    time_ = 0;
+    char_count_ = 0;
+    error_count_ = 0;
 }
 
 void Statistic::Count(int _key_code, bool _correct)
 {
-    this->char_count_++;
+    char_count_++;
 
     if ((_key_code < sf::Keyboard::Num0 && _key_code > sf::Keyboard::Unknown)
         || _key_code == sf::Keyboard::Space) {
         if (!_correct) {
-            this->error_count_++;
+            error_count_++;
         }
     } else if (_key_code == sf::Keyboard::BackSpace) {
-        this->error_count_++;
+        error_count_++;
     }
 }
 
 void Statistic::TimeUpdate()
 {
-    this->time_ = this->clock_.getElapsedTime().asSeconds();
+    time_ = clock_.getElapsedTime().asSeconds();
 }
 
 std::string Statistic::ClockFormatString(double _seconds_total)
@@ -52,7 +52,7 @@ std::string Statistic::ClockFormatString(double _seconds_total)
 void Statistic::DrawRemainingTime(sf::RenderWindow* _window)
 {
     sf::Text text;
-    text.setFont(this->settings_->GetDefaultFont());
+    text.setFont(settings_->GetDefaultFont());
     text.setFillColor(sf::Color::Black);
     text.setPosition(100, 50);
     text.setString("Remaining time " + ClockFormatString(GetRemainingTime()));
@@ -63,7 +63,7 @@ void Statistic::Draw(sf::RenderWindow* _window)
 {
     sf::Text text;
     int x_pos = 1200 / 2 - 100;
-    text.setFont(this->settings_->GetDefaultFont());
+    text.setFont(settings_->GetDefaultFont());
     text.setFillColor(sf::Color::Black);
     text.setPosition(x_pos, 600 / 2 - 50);
     text.setString("WPM " + std::to_string(GetWPM()));
@@ -71,7 +71,7 @@ void Statistic::Draw(sf::RenderWindow* _window)
     _window->draw(text);
 
     text.setPosition(x_pos, 600 / 2);
-    switch (this->settings_->GetDifficultySettingsId()) {
+    switch (settings_->GetDifficultySettingsId()) {
     case 0:
         text.setString("Difficulty easy");
         break;
@@ -91,12 +91,12 @@ void Statistic::Draw(sf::RenderWindow* _window)
     text.setPosition(x_pos, 600 / 2 + 50);
     text.setString(
             "Testing time "
-            + ClockFormatString(this->settings_->GetTestLengthInSeconds()));
+            + ClockFormatString(settings_->GetTestLengthInSeconds()));
 
     _window->draw(text);
 
     text.setPosition(x_pos, 600 / 2 + 100);
-    if (this->char_count_ > 0) {
+    if (char_count_ > 0) {
         text.setString("Accuracy " + std::to_string(GetAccuracy()) + "%");
     } else {
         text.setString("Accuracy 0%");
@@ -107,33 +107,33 @@ void Statistic::Draw(sf::RenderWindow* _window)
 
 double Statistic::GetRemainingTime()
 {
-    return this->settings_->GetTestLengthInSeconds() - this->time_;
+    return settings_->GetTestLengthInSeconds() - time_;
 }
 
 int Statistic::GetWPM()
 {
-    if ((int)this->time_ < 1) {
+    if ((int)time_ < 1) {
         return 0;
     }
-    return (int)((this->char_count_ - this->error_count_) / ((this->time_ / 60) * this->kCharNeed));
+    return (int)((char_count_ - error_count_) / ((time_ / 60) * kCharNeed));
 }
 
 int Statistic::GetAccuracy()
 {
-    return (int)((1 - this->error_count_ / (double)this->char_count_) * 100);
+    return (int)((1 - error_count_ / (double)char_count_) * 100);
 }
 
 double Statistic::GetTime()
 {
-    return this->time_;
+    return time_;
 }
 
 int Statistic::GetCharCount()
 {
-    return this->char_count_;
+    return char_count_;
 }
 
 int Statistic::GetErrorCount()
 {
-    return this->error_count_;
+    return error_count_;
 }

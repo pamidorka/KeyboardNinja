@@ -9,52 +9,52 @@ VirtualButton::VirtualButton(
 
 void VirtualButton::SetSize(double _width, double _height)
 {
-    this->size_.x = _width;
-    this->size_.y = _height;
+    size_.x = _width;
+    size_.y = _height;
 }
 
 void VirtualButton::SetPosition(double _width, double _height)
 {
-    this->position_.x = _width;
-    this->position_.y = _height;
+    position_.x = _width;
+    position_.y = _height;
 }
 
 void VirtualButton::SetCharacter(std::string _symbol)
 {
-    this->character_ = _symbol;
+    character_ = _symbol;
 }
 
 void VirtualButton::SetColor(sf::Color _color)
 {
-    this->color_ = _color;
+    color_ = _color;
 }
 
 void VirtualButton::SetCharacterColor(sf::Color _color)
 {
-    this->character_color_ = _color;
+    character_color_ = _color;
 }
 
 std::string VirtualButton::GetCharacter()
 {
-    return this->character_;
+    return character_;
 }
 
 VirtualButton::Options VirtualButton::GetSize()
 {
-    return this->size_;
+    return size_;
 }
 
 VirtualButton::Options VirtualButton::GetPosition()
 {
-    return this->position_;
+    return position_;
 }
 
 sf::Color VirtualButton::GetColor()
 {
-    return this->color_;
+    return color_;
 }
 
 sf::Color VirtualButton::GetCharacterColor()
 {
-    return this->character_color_;
+    return character_color_;
 }

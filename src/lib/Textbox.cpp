@@ -6,10 +6,10 @@ const sf::Color TextboxModel::kStandartCharColor = sf::Color(190, 190, 190);
 
 TextboxView::TextboxView(Settings* _settings)
 {
-    this->settings_ = _settings;
+    settings_ = _settings;
     SetPosition(1200 / 4, 600 / 3);
 
-    this->model_ = new TextboxModel(_settings);
+    model_ = new TextboxModel(_settings);
 }
 
 TextboxView::~TextboxView()
@@ -19,50 +19,50 @@ TextboxView::~TextboxView()
 
 void TextboxView::InteractionTextboxModel(int _key_code, bool _shift_pressed)
 {
-    this->model_->MovePointer(_key_code, _shift_pressed);
+    model_->MovePointer(_key_code, _shift_pressed);
 }
 
 void TextboxView::SetPosition(double _x, double _y)
 {
-    this->position_.x = _x;
-    this->position_.y = _y;
+    position_.x = _x;
+    position_.y = _y;
 }
 
 bool TextboxView::CheckCharCorrect(int _key_code, bool _shift_pressed)
 {
-    return this->model_->CheckCharCorrect(_key_code, _shift_pressed);
+    return model_->CheckCharCorrect(_key_code, _shift_pressed);
 }
 
 void TextboxView::SetSize(double _width, double _height)
 {
-    this->size_.x = _width;
-    this->size_.y = _height;
+    size_.x = _width;
+    size_.y = _height;
 }
 
 void TextboxView::Draw(sf::RenderWindow* _window)
 {
     sf::Text text;
     double dx = 0;
-    text.setFont(this->settings_->GetFont());
-    text.setCharacterSize(this->settings_->GetTextSize());
-    for (size_t i = 0; i < this->model_->GetUsedStr().size(); i++) {
-        text.setFillColor(this->model_->GetUsedStr()[i].color);
-        text.setString(this->model_->GetUsedStr()[i].character);
+    text.setFont(settings_->GetFont());
+    text.setCharacterSize(settings_->GetTextSize());
+    for (size_t i = 0; i < model_->GetUsedStr().size(); i++) {
+        text.setFillColor(model_->GetUsedStr()[i].color);
+        text.setString(model_->GetUsedStr()[i].character);
         text.setPosition(position_.x + dx, position_.y);
-        dx += this->settings_->GetFont()
+        dx += settings_->GetFont()
                       .getGlyph(
-                              this->model_->GetUsedStr()[i].character,
-                              this->settings_->GetTextSize(),
+                              model_->GetUsedStr()[i].character,
+                              settings_->GetTextSize(),
                               false,
                               0)
                       .advance;
         _window->draw(text);
     }
     dx += 10;
-    for (auto i = this->model_->GetList().cbegin();
-         i != this->model_->GetList().cend();
+    for (auto i = model_->GetList().cbegin();
+         i != model_->GetList().cend();
          i++) {
-        text.setFillColor(this->model_->kStandartCharColor);
+        text.setFillColor(model_->kStandartCharColor);
         text.setString((*i));
         text.setPosition(position_.x + dx, position_.y);
         dx += text.getLocalBounds().width + 10;
@@ -72,14 +72,14 @@ void TextboxView::Draw(sf::RenderWindow* _window)
 
 void TextboxView::Restart()
 {
-    this->model_->Restart();
+    model_->Restart();
 }
 
 // texboxmodel functions
 
 TextboxModel::TextboxModel(Settings* _settings)
 {
-    this->settings_ = _settings;
+    settings_ = _settings;
 
     LoadList();
     NewWord();
@@ -99,7 +99,7 @@ void TextboxModel::MovePointer(int _key_code, bool _shift_pressed)
     }
     if (_key_code == sf::Keyboard::BackSpace && pointer_ > 0) {
         pointer_--;
-        ChangeCharColor(this->kStandartCharColor);
+        ChangeCharColor(kStandartCharColor);
     }
 }
 
@@ -121,7 +121,7 @@ void TextboxModel::NewWord()
 
 void TextboxModel::Restart()
 {
-    this->list_string_.clear();
+    list_string_.clear();
     LoadList();
     NewWord();
 }
@@ -169,15 +169,15 @@ bool TextboxModel::CheckCharCorrect(int _key_code, bool _shift_pressed)
 
 const std::vector<TextboxModel::TextChar>& TextboxModel::GetUsedStr()
 {
-    return this->used_str_;
+    return used_str_;
 }
 
 const std::list<std::string>& TextboxModel::GetList()
 {
-    return this->list_string_;
+    return list_string_;
 }
 
 int TextboxModel::GetPointer()
 {
-    return this->pointer_;
+    return pointer_;
 }

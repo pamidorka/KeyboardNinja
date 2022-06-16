@@ -16,9 +16,9 @@ MainWindow::MainWindow()
             50,
             150,
             50,
-            &this->settings_->GetDefaultFont(),
+            &settings_->GetDefaultFont(),
             "Settings",
-            this->settings_->kDefaultTextSize,
+            settings_->kDefaultTextSize,
             MainWindow::kColorsSettingsBtn);
     statistic_ = new Statistic(settings_);
     state_ = TestState::WAITING;
@@ -117,9 +117,9 @@ void MainWindow::Show()
                 }
             }
 
-            if (settings_btn_->Update(this->mouse_pos_, mouse_pressed_)) {
+            if (settings_btn_->Update(mouse_pos_, mouse_pressed_)) {
                 SettingsWindow* settings_window
-                        = new SettingsWindow(*this->settings_);
+                        = new SettingsWindow(*settings_);
                 settings_window->Show();
                 Reset();
                 delete settings_window;

@@ -26,9 +26,9 @@ public:
     TextboxModel(Settings* _settings);
 
     void MovePointer(int _key_code, bool _shift_pressed);
-    void ChooseCharColor(const int _key, bool _shift_pressed);
+    void ChooseCharColor(int _key, bool _shift_pressed);
     bool CheckCharCorrect(int _key_code, bool _shift_pressed);
-    void ChangeCharColor(const sf::Color _color);
+    void ChangeCharColor(sf::Color _color);
     void LoadList();
     void NewWord();
     void Restart();
