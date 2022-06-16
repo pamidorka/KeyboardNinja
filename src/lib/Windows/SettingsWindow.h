@@ -31,7 +31,5 @@ public:
     SettingsWindow() = delete;
     SettingsWindow(Settings& _settings);
 
-    std::string ClockFormatString(int _seconds);
-
     void Show();
 };

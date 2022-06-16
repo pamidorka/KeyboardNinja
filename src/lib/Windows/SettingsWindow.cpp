@@ -130,7 +130,7 @@ SettingsWindow::SettingsWindow(Settings& _settings)
     test_length_value_.setPosition(200, 350);
     test_length_value_.setFillColor(sf::Color::Black);
     test_length_value_.setString(
-            ClockFormatString(settings_->GetTestLengthInSeconds()));
+            Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
     test_length_value_.setFont(settings_->GetDefaultFont());
     test_length_value_.setCharacterSize(settings_->kDefaultTextSize);
 }
@@ -209,33 +209,19 @@ void SettingsWindow::Show()
                         30 * 60);
                 settings_->SetTestLengthInSeconds(new_length);
                 test_length_value_.setString(
-                        ClockFormatString(settings_->GetTestLengthInSeconds()));
+                        Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
             if (test_length_decrease_btn_.Update(mouse_pos_, mouse_pressed_)) {
                 int new_length = std::max(
                         settings_->GetTestLengthInSeconds() - kDeltaTime, 15);
                 settings_->SetTestLengthInSeconds(new_length);
                 test_length_value_.setString(
-                        ClockFormatString(settings_->GetTestLengthInSeconds()));
+                        Settings::ClockFormatString(settings_->GetTestLengthInSeconds()));
             }
 
             Render();
         }
     }
-}
-
-std::string SettingsWindow::ClockFormatString(int _seconds_total)
-{
-    int minutes = _seconds_total / 60;
-    int seconds = _seconds_total % 60;
-
-    std::string s = (minutes < 10) ? "0" : "";
-    s += std::to_string(minutes);
-    s += ":";
-    s += (seconds < 10) ? "0" : "";
-    s += std::to_string(seconds);
-
-    return s;
 }
 
 void SettingsWindow::Render()
